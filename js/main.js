@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     muatDataNavigasi();
     muatDataCarousel();
+    muatDataTrivia();
     initTema();        
     initSaizTeks();    
 });
@@ -252,3 +253,32 @@ window.pergiKeSlaid = function(index) {
     slaidSemasa = index;
     kemaskiniPaparanCarousel();
 };
+
+// =========================================================
+// 6. PENGURUSAN FAKTA & TRIVIA (SEKSYEN 3)
+// =========================================================
+async function muatDataTrivia() {
+    try {
+        const respon = await fetch('./data/trivia.json');
+        const data = await respon.json();
+        const bekasTrivia = document.getElementById('trivia-container');
+
+        if (!bekasTrivia) return;
+
+        // Gabungkan elemen tatasusunan (array) fakta menjadi perenggan HTML
+        let htmlFakta = '';
+        data.fakta.forEach(teks => {
+            htmlFakta += `<p class="trivia-item">${teks}</p>`;
+        });
+
+        // Suntik ke dalam skrin
+        bekasTrivia.innerHTML = `
+            <h2>${data.tajuk}</h2>
+            ${htmlFakta}
+            <div class="trivia-sumber">${data.sumber}</div>
+        `;
+
+    } catch (error) {
+        console.error("Gagal memuatkan data Trivia:", error);
+    }
+}
