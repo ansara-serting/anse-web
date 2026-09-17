@@ -120,7 +120,7 @@
     width: 100%;
     height: 100%;
     /* Tambah padding-top 90px untuk elak bertindih dengan blok terapung */
-    padding: 90px 0 0 50px; 
+    padding: 90px 0 0 0px; 
 }
 
 /* Kad Menu Individual */
@@ -398,4 +398,8 @@ body.dark-theme .btn-hamburger {
 .popover button:hover {
     background: var(--kuning-anse);
     border-color: #d4b900;
+}
+
+.hidden {
+    display: none !important;
 }
