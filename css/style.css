@@ -249,3 +249,121 @@
         transform: scale(0.8);
     }
 }
+
+/* ==========================================================================
+   6. MENU SISI (OFF-CANVAS DRAWER) & BACKDROP
+   ========================================================================== */
+.drawer {
+    position: fixed;
+    top: 0;
+    left: -320px; /* Sembunyi di luar skrin kiri */
+    width: 320px;
+    height: 100vh;
+    background-color: var(--gelap-charcoal);
+    color: #ffffff;
+    z-index: 1001;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.5);
+}
+
+.drawer.open {
+    left: 0; /* Meluncur masuk */
+}
+
+.drawer:not(.hidden) {
+    display: flex !important; /* Timpa utiliti .hidden */
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.drawer-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Tolak footer ke bawah */
+}
+
+.drawer-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: block;
+    padding: 12px 0;
+    transition: color 0.2s ease;
+}
+
+.drawer-menu li a:hover {
+    color: var(--kuning-anse);
+}
+
+.drawer-footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 15px;
+    font-size: 0.9rem;
+}
+
+/* Latar Belakang Gelap (Backdrop) */
+.drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px); /* Efek blur ala glassmorphism */
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.drawer-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ==========================================================================
+   7. POPOVER AKSESIBILITI (^A)
+   ========================================================================== */
+.a11y-wrapper {
+    position: relative;
+}
+
+.popover {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.popover button {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #333;
+}
+
+.popover button:hover {
+    background: var(--kuning-anse);
+    border-color: #d4b900;
+}
