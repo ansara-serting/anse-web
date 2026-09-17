@@ -1,0 +1,29 @@
+[
+  {
+    "tajuk": "Ansara Serting",
+    "sub_teks": "Ketahui alumni MRSM Serting dengan lebih lanjut >",
+    "pautan": "#ansara-serting",
+    "class_kad": "card-1"
+  },
+  {
+    "tajuk": "Galeri",
+    "sub_teks": "Eh mano gambar sey? >",
+    "pautan": "#galeri",
+    "objek": "[ Kamera 3D ]",
+    "class_kad": "card-2"
+  },
+  {
+    "tajuk": "Keahlian ANSE",
+    "sub_teks": "Sey 💛 ANSE >",
+    "pautan": "#keahlian",
+    "objek": "[ Pen 3D ]",
+    "class_kad": "card-3"
+  },
+  {
+    "tajuk": "Hubungi kami",
+    "sub_teks": "Ada pertanyaan? Kami cuba bantu >",
+    "pautan": "#hubungi",
+    "objek": "[ Telefon 3D ]",
+    "class_kad": "card-4"
+  }
+]
