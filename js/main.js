@@ -40,11 +40,18 @@ async function muatDataNavigasi() {
         const bekasHighlight = document.getElementById('highlight-grid-container');
         if (beritaHighlight && bekasHighlight) {
             bekasHighlight.innerHTML = `
-                <div class="highlight-placeholder">
-                    <span class="badge">${beritaHighlight.kategori}</span>
-                    <p class="highlight-title">${beritaHighlight.tajuk}</p>
-                    <small>${beritaHighlight.kapsyen_klik}</small>
-                </div>
+                <a href="${beritaHighlight.pautan}" class="highlight-link-wrapper">
+                    <!-- Layer 1: Gambar Latar -->
+                    <div class="highlight-bg" style="background-image: url('${beritaHighlight.imej}');"></div>
+                    <!-- Layer 2: Kecerunan Gelap (Gradient) -->
+                    <div class="highlight-overlay"></div>
+                    <!-- Layer 3: Teks -->
+                    <div class="highlight-content">
+                        <span class="badge">${beritaHighlight.kategori}</span>
+                        <h2 class="highlight-title">${beritaHighlight.tajuk}</h2>
+                        <small class="highlight-caption">${beritaHighlight.kapsyen_klik}</small>
+                    </div>
+                </a>
             `;
         }
 
