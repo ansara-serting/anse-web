@@ -158,10 +158,19 @@
 }
 
 .card-objek {
-    align-self: flex-end;
-    font-style: italic;
-    font-size: 0.85rem;
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    color: #000000;
+    opacity: 0.12; /* Jadikan efek watermark pudar yang premium */
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none; /* Pastikan ia tak halang jari pengguna klik kad */
+}
+
+/* Animasi apabila kad disentuh / hover */
+.menu-card:hover .card-objek {
     opacity: 0.6;
+    transform: scale(1.15) rotate(-8deg); /* Ikon membesar dan condong sedikit */
 }
 
 /* ==========================================================================
