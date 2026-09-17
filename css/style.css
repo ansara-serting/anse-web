@@ -496,3 +496,170 @@ body.dark-theme .btn-hamburger {
 .hidden {
     display: none !important;
 }
+
+/* ==========================================================================
+   8. SEKSYEN CAROUSEL (PROGRAM & TABUNG KEBAJIKAN)
+   ========================================================================== */
+#seksyen-carousel {
+    background-color: var(--gelap-charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-wrapper {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Trek yang memegang semua slaid */
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Slaid Individual */
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Gambar Latar Slaid */
+.slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+/* Kecerunan Gelap untuk kebolehbacaan teks */
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.3) 60%, transparent);
+    z-index: 2;
+}
+
+/* Konten Teks Slaid */
+.slide-content {
+    position: relative;
+    z-index: 3;
+    width: 85%;
+    max-width: 1200px;
+    color: #ffffff;
+    padding: 0 50px;
+}
+
+.slide-content h2 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    color: var(--kuning-anse);
+}
+
+.slide-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.btn-utama {
+    display: inline-block;
+    background-color: var(--kuning-anse);
+    color: #000;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: transform 0.2s ease, background-color 0.2s;
+}
+
+.btn-utama:hover {
+    background-color: #e6c800;
+    transform: translateY(-2px);
+}
+
+/* Butang Navigasi (Kiri/Kanan) */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s, transform 0.2s;
+    backdrop-filter: blur(4px);
+}
+
+.carousel-btn:hover {
+    background: var(--kuning-anse);
+    color: #000;
+    border-color: var(--kuning-anse);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn { left: 30px; }
+.next-btn { right: 30px; }
+
+/* Titik Penunjuk (Dots) */
+.carousel-dots {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.dot.active {
+    background: var(--kuning-anse);
+    transform: scale(1.3);
+}
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+    .slide-content h2 { font-size: 2.2rem; }
+    .slide-content { padding: 0 20px; }
+    .carousel-btn { display: none; } /* Sorok butang di phone, biarkan dots sahaja */
+}

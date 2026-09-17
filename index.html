@@ -70,17 +70,28 @@
             </div>
         </section>
 
-        <section id="seksyen-carousel" class="full-screen bg-carousel">
-            <div class="section-placeholder">
-                <h2>SEKSYEN 2: CAROUSEL</h2>
-                <p>Placeholder untuk slaid program & Tabung Kebajikan</p>
-            </div>
-        </section>
+<!-- SEKSYEN 2: CAROUSEL PROGRAM & SUMBANGAN -->
+        <section id="seksyen-carousel" class="full-screen">
+            <div class="carousel-wrapper">
+                
+                <!-- Butang Navigasi Kiri/Kanan -->
+                <button class="carousel-btn prev-btn" id="carousel-prev" aria-label="Slaid Sebelumnya">❮</button>
+                
+                <!-- Bekas Trek Carousel (Data JSON akan masuk sini) -->
+                <div class="carousel-track" id="carousel-track">
+                    <!-- Placeholder sementara -->
+                    <div class="carousel-slide" style="display:flex; justify-content:center; align-items:center; height:100%;">
+                        <h2>Memuatkan Program...</h2>
+                    </div>
+                </div>
 
-        <section id="seksyen-trivia" class="full-screen bg-trivia">
-            <div class="section-placeholder">
-                <h2>SEKSYEN 3: FACTS & TRIVIA</h2>
-                <p>Placeholder untuk fakta berputar 10 saat</p>
+                <button class="carousel-btn next-btn" id="carousel-next" aria-label="Slaid Seterusnya">❯</button>
+                
+                <!-- Titik Penunjuk (Dots) -->
+                <div class="carousel-dots" id="carousel-dots">
+                    <!-- Dots akan dijana oleh JS -->
+                </div>
+                
             </div>
         </section>
 
