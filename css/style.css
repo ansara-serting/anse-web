@@ -498,7 +498,7 @@ body.dark-theme .btn-hamburger {
 }
 
 /* ==========================================================================
-   8. SEKSYEN CAROUSEL (PROGRAM & TABUNG KEBAJIKAN)
+   8. SEKSYEN CAROUSEL (BERITA)
    ========================================================================== */
 #seksyen-carousel {
     background-color: var(--gelap-charcoal);
@@ -540,7 +540,7 @@ body.dark-theme .btn-hamburger {
 /* Mod Partial View (Hanya aktif untuk skrin landscape/desktop) */
 @media (min-width: 769px) {
     .seksyen-carousel-partial .carousel-slide {
-        min-width: 80%; /* Slaid tak ambil penuh skrin, hanya 80% */
+        min-width: 88%; /* Slaid tak ambil penuh skrin, hanya 80% */
         margin: 0 1%;   /* Jarak sikit antara slaid */
         opacity: 0.3;   /* Slaid kiri/kanan jadi pudar */
         transform: scale(0.85); /* Slaid kiri/kanan mengecil sedikit */
