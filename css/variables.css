@@ -1,0 +1,38 @@
+/* Tetapan Akar (Root) - Default Light Mode & Saiz Teks */
+:root {
+    /* Aksesibiliti: Saiz Teks Asas */
+    --base-font-size: 16px;
+    
+    /* Palet Warna Jenama */
+    --kuning-anse: #FBE105; /* Anggaran dari mockup */
+    --biru-fakta: #3B428A;  /* Anggaran dari mockup */
+    --gelap-charcoal: #2A2A2A; 
+    --olive-khaki: #5A5835;
+    
+    /* Warna Dinamik (Untuk sokongan Dark Mode) */
+    --bg-utama: #FFFFFF;
+    --teks-utama: #333333;
+    --teks-cerah: #FFFFFF;
+}
+
+/* Tema Gelap (Dark Mode) */
+body.dark-theme {
+    --bg-utama: #121212;
+    --teks-utama: #E0E0E0;
+    --kuning-anse: #D4B900; /* Sedikit malap untuk keselesaan mata */
+}
+
+/* Mengikat saiz fon global kepada pembolehubah */
+html {
+    font-size: var(--base-font-size);
+    scroll-behavior: smooth; /* Skrol lembut untuk anchor links */
+}
+
+body {
+    background-color: var(--bg-utama);
+    color: var(--teks-utama);
+    font-family: 'Arial', sans-serif; /* Boleh tukar ke fon rasmi Google Fonts nanti */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Elak skrol mendatar yang tak diingini */
+}
