@@ -10,12 +10,14 @@
 <body>
 
     <div id="blok-a11y" class="global-floating top-right">
-        <a href="/peta-laman" class="btn-sitemap">▶ Peta laman sesawang ini</a>
-        <button id="btn-text-size" class="btn-a11y">^A</button>
-        <div id="popover-a11y" class="hidden">
-            <button onclick="ubahSaizTeks('kecil')">A-</button>
-            <button onclick="ubahSaizTeks('asal')">A</button>
-            <button onclick="ubahSaizTeks('besar')">A+</button>
+        <a href="#peta-laman" class="btn-sitemap">▶ Peta laman sesawang ini</a>
+        <div class="a11y-wrapper">
+            <button id="btn-text-size" class="btn-a11y" onclick="toggleA11yPopover()">^A</button>
+            <div id="popover-a11y" class="popover hidden">
+                <button onclick="ubahSaizTeks('kecil')">A-</button>
+                <button onclick="ubahSaizTeks('asal')">A</button>
+                <button onclick="ubahSaizTeks('besar')">A+</button>
+            </div>
         </div>
     </div>
 
@@ -28,57 +30,103 @@
             <li><a href="#">ANSE</a></li>
             <li><a href="#">Buku Gambar</a></li>
             <li><a href="#">Keahlian</a></li>
+            <li><a href="#">Hubungi Kami</a></li>
             <li><a href="#">Berita</a></li>
             <li><a href="#">Sumbangan</a></li>
-            <li><a href="#">Balai Arkib</a></li>
-            <li><a href="#"">Belasungkawa</a></li>
-            <li><a href="#">MRSM Serting</a></li>
-            </ul>
+        </ul>
         <div class="drawer-footer">
             <p>Tetapan</p>
             <button id="toggle-tema">Tukar Tema 🌓</button>
+            <br><br>
             <a href="#">Hubungi webmaster ></a>
         </div>
     </nav>
-    <div id="drawer-backdrop" class="hidden"></div> <main id="scroll-container">
+    <div id="drawer-backdrop" class="drawer-backdrop hidden"></div>
+
+    <main id="scroll-container">
         
-        <section id="seksyen-navigasi" class="full-screen">
-            <div class="highlight-grid">
+        <section id="seksyen-navigasi" class="full-screen bg-navigasi">
+            <div class="nav-wrapper">
+                
+                <div class="highlight-grid" id="highlight-grid-container">
+                    <div class="highlight-placeholder">
+                        <span class="badge">HIGHLIGHT</span>
+                        <p class="highlight-title">Lensa Jubli Mutiara MRSM Serting 30 Tahun</p>
+                        <small>Klik untuk besarkan paparan ></small>
+                    </div>
                 </div>
-            <div class="grid-menu kuning-anse">
-                </div>
-        </section>
 
-        <section id="seksyen-carousel" class="full-screen">
-            <div class="social-shield">
-                </div>
-            <div class="carousel-container">
-                </div>
-        </section>
+                <div class="grid-menu-container">
+                    
+                    <div class="logo-anse-overlay">
+                        <div class="logo-placeholder">[ LOGO ANSE ]</div>
+                    </div>
 
-        <section id="seksyen-trivia" class="full-screen biru-fakta">
-            <div class="trivia-container">
+                    <div class="grid-menu-4">
+                        
+                        <a href="#ansara-serting" class="menu-card card-1">
+                            <div class="card-content">
+                                <h3>Ansara Serting</h3>
+                                <p>Ketahui alumni MRSM Serting dengan lebih lanjut ></p>
+                            </div>
+                        </a>
+
+                        <a href="#galeri" class="menu-card card-2">
+                            <div class="card-content">
+                                <h3>Galeri</h3>
+                                <p>Eh mano gambar sey? ></p>
+                            </div>
+                            <div class="card-objek">[ Kamera 3D ]</div>
+                        </a>
+
+                        <a href="#keahlian" class="menu-card card-3">
+                            <div class="card-content">
+                                <h3>Keahlian ANSE</h3>
+                                <p>Sey 💛 ANSE ></p>
+                            </div>
+                            <div class="card-objek">[ Pen 3D ]</div>
+                        </a>
+
+                        <a href="#hubungi" class="menu-card card-4">
+                            <div class="card-content">
+                                <h3>Hubungi kami</h3>
+                                <p>Ada pertanyaan? Kami cuba bantu ></p>
+                            </div>
+                            <div class="card-objek">[ Telefon 3D ]</div>
+                        </a>
+
+                    </div>
                 </div>
-            <div class="sumber-rujukan">
-                <small>Sumber: https://myansara.org/history/</small>
+
             </div>
         </section>
 
-        <footer id="seksyen-footer" class="full-screen">
-            <div class="blok-peta">
-                </div>
-            <div class="blok-info-menu gelap-charcoal">
-                </div>
-            <div class="blok-sub-footer">
-                <p>&copy; 2026 Persatuan Bekas Pelajar MRSM Malaysia: ANSARA Serting</p>
+        <section id="seksyen-carousel" class="full-screen bg-carousel">
+            <div class="section-placeholder">
+                <h2>SEKSYEN 2: CAROUSEL</h2>
+                <p>Placeholder untuk slaid program & Tabung Kebajikan</p>
+            </div>
+        </section>
+
+        <section id="seksyen-trivia" class="full-screen bg-trivia">
+            <div class="section-placeholder">
+                <h2>SEKSYEN 3: FACTS & TRIVIA</h2>
+                <p>Placeholder untuk fakta berputar 10 saat</p>
+            </div>
+        </section>
+
+        <footer id="seksyen-footer" class="full-screen bg-footer">
+            <div class="section-placeholder">
+                <h2>SEKSYEN 4: FOOTER & SUB-FOOTER</h2>
+                <p>Placeholder untuk Peta Google & Info Korporat</p>
             </div>
         </footer>
 
     </main>
 
     <div id="blok-indikator" class="global-floating bottom-center">
-        <a href="#seksyen-carousel" id="btn-scroll-down">▼</a>
-        </div>
+        <a href="#seksyen-carousel" id="btn-scroll-indicator" class="indicator-arrow">▼</a>
+    </div>
 
     <script src="js/main.js"></script>
 </body>
