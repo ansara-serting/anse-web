@@ -1,6 +1,7 @@
 // --- JALANKAN SEMUA FUNGSI SEMASA LAMAN DIMUATKAN ---
 document.addEventListener("DOMContentLoaded", () => {
     muatDataNavigasi();
+    muatDataCarousel();
     initTema();        
     initSaizTeks();    
 });
@@ -160,3 +161,94 @@ function initSaizTeks() {
         document.documentElement.style.setProperty('--base-font-size', saizDisimpan);
     }
 }
+
+// =========================================================
+// 5. PENGURUSAN CAROUSEL (SEKSYEN 2)
+// =========================================================
+let slaidSemasa = 0;
+let jumlahSlaid = 0;
+
+async function muatDataCarousel() {
+    try {
+        const respon = await fetch('./data/carousel.json');
+        const dataCarousel = await respon.json();
+        jumlahSlaid = dataCarousel.length;
+
+        const track = document.getElementById('carousel-track');
+        const dotsContainer = document.getElementById('carousel-dots');
+        
+        if (!track || !dotsContainer) return;
+
+        track.innerHTML = ''; // Kosongkan placeholder HTML
+        dotsContainer.innerHTML = ''; // Kosongkan dots lama
+
+        // Suntik data JSON ke dalam HTML
+        dataCarousel.forEach((item, index) => {
+            // Bina Slaid
+            track.innerHTML += `
+                <div class="carousel-slide">
+                    <div class="slide-bg" style="background-image: url('${item.imej}');"></div>
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <h2>${item.tajuk}</h2>
+                        <p>${item.keterangan}</p>
+                        <a href="${item.pautan_butang}" class="btn-utama">${item.label_butang}</a>
+                    </div>
+                </div>
+            `;
+
+            // Bina Titik Navigasi (Dots)
+            dotsContainer.innerHTML += `
+                <div class="dot ${index === 0 ? 'active' : ''}" onclick="pergiKeSlaid(${index})"></div>
+            `;
+        });
+
+        // Pasang pendengar klik (Event Listeners) untuk butang Kiri/Kanan
+        const btnNext = document.getElementById('carousel-next');
+        const btnPrev = document.getElementById('carousel-prev');
+        
+        if (btnNext) btnNext.addEventListener('click', slaidSeterusnya);
+        if (btnPrev) btnPrev.addEventListener('click', slaidSebelumnya);
+
+    } catch (error) {
+        console.error("Gagal memuatkan data Carousel JSON:", error);
+    }
+}
+
+// --- FUNGSI PERGERAKAN CAROUSEL ---
+function kemaskiniPaparanCarousel() {
+    const track = document.getElementById('carousel-track');
+    const dots = document.querySelectorAll('.dot');
+    
+    if (!track) return;
+    
+    // Gerakkan trek ke kiri berdasarkan indeks slaid (Setiap slaid = 100% lebar skrin)
+    track.style.transform = `translateX(-${slaidSemasa * 100}%)`;
+
+    // Kemaskini warna titik (dot) aktif
+    dots.forEach((dot, index) => {
+        if (index === slaidSemasa) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
+
+function slaidSeterusnya() {
+    // Jika di slaid terakhir, kembali ke 0. Jika tidak, tambah 1.
+    slaidSemasa = (slaidSemasa === jumlahSlaid - 1) ? 0 : slaidSemasa + 1;
+    kemaskiniPaparanCarousel();
+}
+
+function slaidSebelumnya() {
+    // Jika di slaid pertama, pergi ke slaid terakhir. Jika tidak, tolak 1.
+    slaidSemasa = (slaidSemasa === 0) ? jumlahSlaid - 1 : slaidSemasa - 1;
+    kemaskiniPaparanCarousel();
+}
+
+// Buka fungsi ini ke global (window) supaya titik HTML boleh guna atribut 'onclick'
+window.pergiKeSlaid = function(index) {
+    slaidSemasa = index;
+    kemaskiniPaparanCarousel();
+};
