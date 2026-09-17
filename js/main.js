@@ -259,9 +259,9 @@ function kemaskiniPaparanCarousel() {
         seksyenCarousel.classList.add('seksyen-carousel-partial');
         
         // MATEMATIK PARTIAL VIEW:
-        // Slaid = 80%, Kiri = 1%, Kanan = 1% (Total 82%)
-        // Untuk center slaid pertama (index 0), tolak track ke kanan sebanyak 9%
-        track.style.transform = `translateX(calc(-${slaidSemasa * 82}% + 9%))`;
+        // Slaid = 88%, Kiri = 1%, Kanan = 1% (Total 90% pergerakan)
+        // Untuk center slaid pertama (index 0), tolak track ke kanan sebanyak 5%
+        track.style.transform = `translateX(calc(-${slaidSemasa * 90}% + 5%))`;
     } else {
         seksyenCarousel.classList.remove('seksyen-carousel-partial');
         // Mod penuh biasa untuk phone
