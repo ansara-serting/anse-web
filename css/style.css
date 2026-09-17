@@ -127,50 +127,65 @@
 .menu-card {
     text-decoration: none;
     color: #000000;
-    padding: 40px 30px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Garisan lebih halus */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end; /* Tolak teks ke bawah */
+    align-items: flex-end;     /* Tolak teks ke kanan */
+    text-align: right;         /* Susunan teks ke kanan */
     transition: background-color 0.3s ease, transform 0.1s ease;
     position: relative;
+    overflow: hidden;          /* INI PENTING: Untuk 'potong' gambar yang terkeluar */
 }
 
 /* Kesan Hover (Desktop) */
 .menu-card:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Kesan Sentuh (Mobile/Active) */
-.menu-card:active {
-    transform: scale(0.98);
+.card-content {
+    position: relative;
+    z-index: 2; /* Pastikan teks sentiasa berada di atas gambar */
+    max-width: 70%; /* Elak teks bertindih terlalu banyak dengan gambar */
 }
 
 .menu-card h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.5rem;
+    margin: 0 0 5px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
 .menu-card p {
     margin: 0;
-    font-size: 0.95rem;
-    opacity: 0.85;
+    font-size: 0.85rem;
+    opacity: 0.9;
 }
 
+/* Gambar Rich Photo (Menggantikan SVG lama) */
 .card-objek {
     position: absolute;
-    bottom: 15px;
-    right: 20px;
-    color: #000000;
-    opacity: 0.12; /* Jadikan efek watermark pudar yang premium */
-    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    pointer-events: none; /* Pastikan ia tak halang jari pengguna klik kad */
+    z-index: 1; /* Berada di belakang teks */
+    top: 50%; 
+    left: -15%; /* Tarik gambar ke kiri melepasi sempadan kad */
+    transform: translateY(-50%); /* Kekalkan gambar di tengah menegak */
+    height: 120%; /* Sengaja besarkan gambar supaya terpotong atas/bawah */
+    width: 60%;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Animasi apabila kad disentuh / hover */
+.card-objek img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain; /* Kekalkan nisbah gambar */
+    object-position: left center;
+    filter: drop-shadow(8px 10px 15px rgba(0,0,0,0.3)); /* Efek bayang 3D dari mockup */
+}
+
+/* Kesan Hover pada Gambar */
 .menu-card:hover .card-objek {
-    opacity: 0.6;
-    transform: scale(1.15) rotate(-8deg); /* Ikon membesar dan condong sedikit */
+    transform: translateY(-50%) scale(1.08) rotate(3deg);
 }
 
 /* ==========================================================================
