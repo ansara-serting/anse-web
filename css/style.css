@@ -724,3 +724,96 @@ body.dark-theme .btn-hamburger {
     .trivia-item { font-size: 0.95rem; }
     .trivia-sumber { right: 20px; bottom: 20px; font-size: 0.7rem; }
 }
+
+/* ==========================================================================
+   10. SEKSYEN FOOTER & PETA (SEKSYEN 4)
+   ========================================================================== */
+#seksyen-footer {
+    position: relative;
+    display: flex;
+    align-items: flex-end; /* Tolak panel info ke bahagian bawah */
+    justify-content: center;
+}
+
+/* Bekas Peta (Memenuhi ruang penuh) */
+.footer-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.footer-map iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(15%) contrast(110%); /* Beri sedikit gaya korporat pada peta */
+}
+
+/* Panel Gelap (Tertindih di atas peta) */
+.footer-panel {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background-color: var(--gelap-charcoal);
+    color: #ffffff;
+    padding: 40px 50px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    border-top: 4px solid var(--kuning-anse);
+}
+
+.footer-logo-container {
+    margin-bottom: 15px;
+}
+
+.footer-logo-container img {
+    height: 50px;
+}
+
+.footer-info p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 5px 0;
+    opacity: 0.8;
+}
+
+.footer-links h4 {
+    color: var(--kuning-anse);
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Susun pautan pantas menjadi 2 lajur */
+    gap: 10px;
+}
+
+.footer-links ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: color 0.2s;
+}
+
+.footer-links ul li a:hover {
+    color: var(--kuning-anse);
+    opacity: 1;
+}
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+    .footer-panel {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+    }
+}

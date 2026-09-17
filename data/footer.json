@@ -1,0 +1,13 @@
+{
+  "nama_organisasi": "Persatuan Bekas Pelajar MRSM Malaysia (ANSARA) Serting",
+  "no_pendaftaran": "PPM-022-14-14121993-000022",
+  "alamat": "MRSM Serting, Bandar Baru Jempol,\n72120 Jempol, Negeri Sembilan.",
+  "laman_web": "ANSARASERTING.ORG",
+  "pautan_pantas": [
+    {"label": "Ansara", "url": "#ansara-serting"},
+    {"label": "Sumbangan", "url": "#sumbangan"},
+    {"label": "Buku Gambar", "url": "#galeri"},
+    {"label": "Hubungi Kami", "url": "#hubungi"}
+  ],
+  "peta_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.4939223788547!2d102.3908819!3d2.9152349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31ce594452140131%3A0xc47b9ebc7d6d1d23!2sMaktab%20Rendah%20Sains%20MARA%20(MRSM)%20Serting!5e0!3m2!1sen!2smy!4v1700000000000!5m2!1sen!2smy"
+}

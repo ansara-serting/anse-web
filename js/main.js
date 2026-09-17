@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     muatDataNavigasi();
     muatDataCarousel();
     muatDataTrivia();
+    muatDataFooter();
     initTema();        
     initSaizTeks();    
 });
@@ -280,5 +281,49 @@ async function muatDataTrivia() {
 
     } catch (error) {
         console.error("Gagal memuatkan data Trivia:", error);
+    }
+}
+
+// =========================================================
+// 7. PENGURUSAN FOOTER (SEKSYEN 4)
+// =========================================================
+async function muatDataFooter() {
+    try {
+        const respon = await fetch('./data/footer.json');
+        const data = await respon.json();
+
+        const bekasPeta = document.getElementById('footer-map-container');
+        const bekasInfo = document.getElementById('footer-info-container');
+
+        if (bekasPeta) {
+            bekasPeta.innerHTML = `<iframe src="${data.peta_embed}" loading="lazy" allowfullscreen></iframe>`;
+        }
+
+        if (bekasInfo) {
+            let pautanHTML = '';
+            data.pautan_pantas.forEach(link => {
+                pautanHTML += `<li><a href="${link.url}">${link.label}</a></li>`;
+            });
+
+            bekasInfo.innerHTML = `
+                <div class="footer-info">
+                    <div class="footer-logo-container">
+                        <img src="assets/logo-anse.png" alt="Logo ANSE">
+                    </div>
+                    <p><strong>${data.nama_organisasi}</strong></p>
+                    <p>${data.no_pendaftaran}</p>
+                    <p>${data.alamat.replace(/\n/g, '<br>')}</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>${data.laman_web}</h4>
+                    <ul>
+                        ${pautanHTML}
+                    </ul>
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error("Gagal memuatkan data Footer:", error);
     }
 }
