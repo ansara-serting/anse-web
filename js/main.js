@@ -212,6 +212,32 @@ async function muatDataCarousel() {
         if (btnNext) btnNext.addEventListener('click', slaidSeterusnya);
         if (btnPrev) btnPrev.addEventListener('click', slaidSebelumnya);
 
+        // --- TAMBAH KOD SWIPE (TOUCH) DI SINI ---
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const threshold = 50; // Jarak minima (pixel) untuk dikira sebagai swipe
+            if (touchEndX < touchStartX - threshold) {
+                // Swipe ke kiri (Slaid Seterusnya)
+                slaidSeterusnya();
+            }
+            if (touchEndX > touchStartX + threshold) {
+                // Swipe ke kanan (Slaid Sebelumnya)
+                slaidSebelumnya();
+            }
+        }
+        // --- TAMAT KOD SWIPE ---
+
     } catch (error) {
         console.error("Gagal memuatkan data Carousel JSON:", error);
     }

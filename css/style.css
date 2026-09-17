@@ -601,6 +601,103 @@ body.dark-theme .btn-hamburger {
     transform: translateY(-2px);
 }
 
+/* --- BLOK SOSIAL MEDIA (SHIELD) --- */
+.social-block-overlay {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 240px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.social-shield-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
+}
+
+.social-shield-bg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.social-content {
+    text-align: center;
+    color: #000;
+}
+
+.social-title {
+    display: block;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.social-subtitle {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-icons a {
+    color: #000;
+    transition: transform 0.2s ease;
+    display: flex;
+}
+
+.social-icons a:hover {
+    transform: scale(1.15) translateY(-3px);
+}
+
+.social-icons svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+/* Responsif untuk Mobile (Ikut Mockup 3) */
+@media (max-width: 768px) {
+    .social-block-overlay {
+        left: auto;
+        right: -30px; /* Anjak keluar ke kanan supaya terpotong separuh */
+        transform: none;
+        width: 100px;
+        height: 280px; /* Lebih panjang untuk tampung ikon menegak */
+        padding-top: 90px; /* Tolak ke bawah sikit dari butang A11y */
+    }
+    
+    .social-title, .social-subtitle {
+        display: none; /* Sorok teks pada paparan telefon */
+    }
+    
+    .social-icons {
+        flex-direction: column; /* Susun ikon menegak */
+        gap: 20px;
+    }
+    
+    .social-icons svg {
+        width: 26px;
+        height: 26px;
+    }
+}
+
 /* Butang Navigasi (Kiri/Kanan) */
 .carousel-btn {
     position: absolute;
@@ -635,7 +732,7 @@ body.dark-theme .btn-hamburger {
 /* Titik Penunjuk (Dots) */
 .carousel-dots {
     position: absolute;
-    bottom: 40px;
+    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -661,7 +758,7 @@ body.dark-theme .btn-hamburger {
 @media (max-width: 768px) {
     .slide-content h2 { font-size: 2.2rem; }
     .slide-content { padding: 0 20px; }
-    .carousel-btn { display: none; } /* Sorok butang di phone, biarkan dots sahaja */
+    .carousel-btn { display: none; } /* Sorok butang di phone, biarkan dots sahaja */  
 }
 
 /* ==========================================================================

@@ -14,5 +14,29 @@
     "imej": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1000",
     "label_butang": "Lihat Galeri >",
     "pautan_butang": "#galeri"
+  },
+  {
+    "id": "program-mockup-interview-2026",
+    "tajuk": "Mockup Interview 2026",
+    "keterangan": "Melalui program ini, para pelajar telah didedahkan dengan pengalaman sebenar sesi temuduga, termasuk teknik menjawab soalan dengan yakin, cara berkomunikasi secara profesional serta penyediaan diri dari aspek penampilan dan bahasa badan.",
+    "imej": "assets/mockup-interview-2026.png",
+    "label_butang": "Lihat Berita Ini >",
+    "pautan_butang": "#program-mockup-interview-2026"
+  },
+  {
+    "id": "program-abdc-2026",
+    "tajuk": "Ansara Blood Donation Campaign 2026",
+    "keterangan": "Seramai 47 orang sukarelawan telah berganding bahu menjayakan program ini, terdiri daripada 33 pelajar dan guru MRSM Serting, 7 wakil ANSE, serta 7 wakil NGO.",
+    "imej": "assets/abdc-2026.jpg",
+    "label_butang": "Lihat Berita Ini >",
+    "pautan_butang": "#program-abdc-2026"
+  },
+  {
+    "id": "program-1",
+    "tajuk": "Iftar Perdana Alumni 2026",
+    "keterangan": "Merapatkan ukhuwah di bulan mulia. Berkumpul, berbuka bersama, dan mengimbau kenangan di MRSM Serting.",
+    "imej": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1000",
+    "label_butang": "Lihat Galeri >",
+    "pautan_butang": "#galeri"
   }
 ]
