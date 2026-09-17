@@ -380,3 +380,73 @@ async function muatDataFooter() {
         console.error("Gagal memuatkan data Footer:", error);
     }
 }
+
+// =========================================================
+// 8. KAWALAN BUTANG SKROL DINAMIK (SCROLL INDICATOR)
+// =========================================================
+const btnScrollIndicator = document.getElementById('btn-scroll-indicator');
+
+// Senarai ID seksyen mengikut turutan dari atas ke bawah
+const senaraiSeksyen = [
+    'seksyen-navigasi', // Ini mewakili bahagian atas sekali (Navigasi)
+    'seksyen-carousel',
+    'seksyen-trivia',
+    'seksyen-footer'
+];
+
+if (btnScrollIndicator) {
+    btnScrollIndicator.addEventListener('click', (e) => {
+        e.preventDefault(); // Halang tingkah laku default link '#'
+
+        let idSeksyenSeterusnya = null;
+
+        // Semak satu persatu seksyen mana yang berada di bawah pandangan skrin sekarang
+        for (let i = 0; i < senaraiSeksyen.length; i++) {
+            const seksyen = document.getElementById(senaraiSeksyen[i]);
+            if (!seksyen) continue;
+
+            const jarakDariAtas = seksyen.getBoundingClientRect().top;
+
+            // Jika jaraknya lebih dari 50px dari atas skrin, ia bermaksud
+            // seksyen ini adalah seksyen yang SETERUSNYA
+            if (jarakDariAtas > 50) {
+                idSeksyenSeterusnya = senaraiSeksyen[i];
+                break; // Berhenti mencari setelah jumpa
+            }
+        }
+
+        // Skrol ke seksyen seterusnya dengan lancar
+        if (idSeksyenSeterusnya) {
+            document.getElementById(idSeksyenSeterusnya).scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // Jika tiada seksyen di bawah (bermakna kita di Footer), kembali ke atas!
+            document.getElementById(senaraiSeksyen[0]).scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
+
+// --- KOD BARU: PEMANTAU FOOTER (Intersection Observer) ---
+const footerSeksyen = document.getElementById('seksyen-footer');
+
+if (footerSeksyen && btnScrollIndicator) {
+    const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Apabila Footer kelihatan di skrin
+                // Kita balut teks dengan span supaya boleh disorok di mobile, dan tambah title untuk tooltip
+                btnScrollIndicator.innerHTML = '▲ <span class="btt-text">Back to top</span>';
+                btnScrollIndicator.setAttribute('title', 'Back to top');
+                btnScrollIndicator.classList.add('back-to-top-mode');
+            } else {
+                // Apabila berada di seksyen lain
+                btnScrollIndicator.innerHTML = '▼';
+                btnScrollIndicator.removeAttribute('title');
+                btnScrollIndicator.classList.remove('back-to-top-mode');
+            }
+        });
+    }, { 
+        threshold: 0.3 // Mula tukar bila 30% footer mula nampak di skrin
+    });
+
+    footerObserver.observe(footerSeksyen);
+}

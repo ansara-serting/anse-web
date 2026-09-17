@@ -935,3 +935,74 @@ body.dark-theme .btn-hamburger {
         padding: 30px 20px;
     }
 }
+
+/* ==========================================================================
+   GAYA KHAS: BUTANG BACK TO TOP
+   ========================================================================== */
+/* 1. Butang Next Section (Lutsinar untuk keadaan biasa) */
+.indicator-arrow {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Kelas ini akan disuntik oleh JavaScript bila sampai ke Footer */
+/* 2. Butang Back to Top (Lutsinar di atas Footer) */
+.indicator-arrow.back-to-top-mode {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #000000;
+    border: none;
+    background-color: transparent !important;
+    box-shadow: none !important;
+
+    /* Tukar warna ikon/teks kepada kuning supaya kontra dengan footer gelap */
+    color: var(--kuning-anse) !important;
+    
+    /* --- BARIS PENTING UNTUK MEMBETULKAN SQUASHED CIRCLE --- */
+    width: auto; /* reset size to content */
+    height: auto;
+    border-radius: 30px; /* Bentuk pil (pill) */
+    /* Buang padding yang tebal sebab dah tak ada bentuk pil/bulat */
+    padding: 10px !important;
+    
+    display: flex; /* keep flex for centering icon/text */
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* space between icon/text */
+    animation: none; /* disable bouncing */
+    
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    
+    /* Pastikan teks tidak tersumbat dan berada pada satu baris */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Efek bila butang disentuh/hover */
+.indicator-arrow.back-to-top-mode:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important; /* Highlight pudar sangat nipis */
+    transform: translateY(-3px);
+}
+
+
+/* ==========================================================================
+   GAYA RESPONSIP: BUTANG BACK TO TOP UNTUK MOBILE
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* Kembalikan ia menjadi butang bulat (circle) di skrin kecil */
+    .indicator-arrow.back-to-top-mode {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        border-radius: 50%; /* Bentuk bulat penuh */
+        justify-content: center;
+    }
+    
+    /* Sorokkan teks "Back to top" di telefon supaya tak langgar pautan */
+    .btt-text {
+        display: none;
+    }
+}
