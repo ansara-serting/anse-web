@@ -533,6 +533,27 @@ body.dark-theme .btn-hamburger {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Tambah transisi untuk efek zoom dan pudar */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease; 
+}
+
+/* Mod Partial View (Hanya aktif untuk skrin landscape/desktop) */
+@media (min-width: 769px) {
+    .seksyen-carousel-partial .carousel-slide {
+        min-width: 80%; /* Slaid tak ambil penuh skrin, hanya 80% */
+        margin: 0 1%;   /* Jarak sikit antara slaid */
+        opacity: 0.3;   /* Slaid kiri/kanan jadi pudar */
+        transform: scale(0.85); /* Slaid kiri/kanan mengecil sedikit */
+        border-radius: 20px; /* Opsional: beri bucu bulat supaya nampak kemas macam kad */
+        overflow: hidden;
+    }
+    
+    /* Slaid yang sedang aktif di tengah */
+    .seksyen-carousel-partial .carousel-slide.active-slide {
+        opacity: 1;
+        transform: scale(1);
+        z-index: 5;
+    }
 }
 
 /* Gambar Latar Slaid */
@@ -613,7 +634,7 @@ body.dark-theme .btn-hamburger {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 30px;
+    padding-top: 65px;
 }
 
 .social-shield-bg {

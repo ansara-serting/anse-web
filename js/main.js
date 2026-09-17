@@ -247,11 +247,35 @@ async function muatDataCarousel() {
 function kemaskiniPaparanCarousel() {
     const track = document.getElementById('carousel-track');
     const dots = document.querySelectorAll('.dot');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const seksyenCarousel = document.getElementById('seksyen-carousel');
     
     if (!track) return;
     
-    // Gerakkan trek ke kiri berdasarkan indeks slaid (Setiap slaid = 100% lebar skrin)
-    track.style.transform = `translateX(-${slaidSemasa * 100}%)`;
+    // Tentukan jika skrin layak untuk Partial View
+    const isPartial = (jumlahSlaid >= 3) && window.innerWidth > 768;
+    
+    if (isPartial) {
+        seksyenCarousel.classList.add('seksyen-carousel-partial');
+        
+        // MATEMATIK PARTIAL VIEW:
+        // Slaid = 80%, Kiri = 1%, Kanan = 1% (Total 82%)
+        // Untuk center slaid pertama (index 0), tolak track ke kanan sebanyak 9%
+        track.style.transform = `translateX(calc(-${slaidSemasa * 82}% + 9%))`;
+    } else {
+        seksyenCarousel.classList.remove('seksyen-carousel-partial');
+        // Mod penuh biasa untuk phone
+        track.style.transform = `translateX(-${slaidSemasa * 100}%)`;
+    }
+
+    // Kemaskini kelas aktif pada slaid (untuk kesan zoom/terang)
+    slides.forEach((slide, index) => {
+        if (index === slaidSemasa) {
+            slide.classList.add('active-slide');
+        } else {
+            slide.classList.remove('active-slide');
+        }
+    });
 
     // Kemaskini warna titik (dot) aktif
     dots.forEach((dot, index) => {
@@ -262,6 +286,9 @@ function kemaskiniPaparanCarousel() {
         }
     });
 }
+
+// TAMBAH BARIS INI: Pastikan margin dikira semula jika pengguna sengetkan phone/resize browser
+window.addEventListener('resize', kemaskiniPaparanCarousel);
 
 function slaidSeterusnya() {
     // Jika di slaid terakhir, kembali ke 0. Jika tidak, tambah 1.
