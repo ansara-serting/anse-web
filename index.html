@@ -10,7 +10,12 @@
 <body>
 
     <div id="blok-a11y" class="global-floating top-right">
-        <button onclick="bukaDrawer()" style="cursor:pointer; padding:5px 10px;">☰ MENU</button>
+        <!-- BLOK GLOBAL 4: Butang Menu (Hamburger) -->
+        <div id="blok-menu-utama" class="global-floating top-left">
+            <button id="btn-hamburger" class="btn-hamburger" onclick="bukaDrawer()" aria-label="Buka Menu">
+                ☰
+            </button>
+        </div>
         <a href="#peta-laman" class="btn-sitemap">▶ Peta laman sesawang ini</a>
         <div class="a11y-wrapper">
             <button id="btn-text-size" class="btn-a11y" onclick="toggleA11yPopover()">^A</button>

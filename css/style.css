@@ -171,6 +171,36 @@
     z-index: 999;
 }
 
+.top-left {
+    top: 20px;
+    left: 20px; /* Jarak yang sama seperti blok A11y di kanan */
+}
+
+.btn-hamburger {
+    background-color: var(--gelap-charcoal);
+    color: var(--kuning-anse);
+    border: none;
+    font-size: 1.5rem; /* Saiz ikon yang selesa untuk ditekan */
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-hamburger:hover {
+    background-color: #000000;
+    transform: scale(1.05); /* Sedikit membesar bila dilalukan tetikus */
+}
+
+/* Semasa Dark Mode, pastikan butang nampak menonjol */
+body.dark-theme .btn-hamburger {
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
 .top-right {
     top: 20px;
     right: 25px;
