@@ -9,12 +9,12 @@
     "display_in": ["highlight"]
   },
   {
-    "id": "program-sambutan-ansara",
-    "tajuk": "Sambutan Alumni ANSE 2026",
+    "id": "program-takeanse-2026",
+    "tajuk": "TakeANSE 2026",
     "kategori": "HIGHLIGHT",
     "kapsyen_klik": "Klik untuk melihat program >",
-    "imej": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=1000",
-    "pautan": "#program-sambutan-ansara",
+    "imej": "assets/639685897_1239808568362592_7585828619519352993_n.jpg",
+    "pautan": "#program-takeanse-2026",
     "display_in": ["highlight"]
   },
   {
@@ -51,6 +51,15 @@
     "imej": "assets/abdc-2026.jpg",
     "label_butang": "Lihat Berita Ini >",
     "pautan_butang": "#program-abdc-2026",
+    "display_in": ["carousel"]
+  },
+  {
+    "id": "balai-arkib",
+    "tajuk": "Mahu lihat senarai berita lama MRSM Serting? Jom ke Balai Arkib!",
+    "keterangan": "Selami kenangan lalu dan ikuti perkembangan sejarah kita. Semua koleksi artikel, buletin, dan liputan program terdahulu ANSARA Serting tersimpan kemas di sini.",
+    "imej": "assets/15926659-casete-5132271.jpg",
+    "label_butang": "Lihat Berita Ini >",
+    "pautan_butang": "#balai-arkib",
     "display_in": ["carousel"]
   }
 ]
