@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ANSARA Serting ialah persatuan bekas pelajar MRSM Serting yang memaparkan berita, program, fakta, dan maklumat komuniti.">
+    <meta property="og:title" content="ANSARA Serting - Persatuan Bekas Pelajar MRSM Serting">
+    <meta property="og:description" content="Berita, program, fakta, dan maklumat komuniti untuk bekas pelajar MRSM Serting.">
     <title>ANSARA Serting - Persatuan Bekas Pelajar MRSM Serting</title>
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/style.css">
@@ -12,25 +15,25 @@
     <div id="blok-a11y" class="global-floating top-right">
         <!-- BLOK GLOBAL 4: Butang Menu (Hamburger) -->
         <div id="blok-menu-utama" class="global-floating top-left">
-            <button id="btn-hamburger" class="btn-hamburger" onclick="bukaDrawer()" aria-label="Buka Menu">
+            <button id="btn-hamburger" class="btn-hamburger" type="button" aria-label="Buka Menu" aria-controls="side-drawer" aria-expanded="false">
                 ☰
             </button>
         </div>
-        <a href="#peta-laman" class="btn-sitemap">▶ Peta laman sesawang ini</a>
+        <a href="#seksyen-footer" class="btn-sitemap">▶ Peta laman sesawang ini</a>
         <div class="a11y-wrapper">
-            <button id="btn-text-size" class="btn-a11y">^A</button>
-            <div id="popover-a11y" class="popover hidden">
-                <button onclick="ubahSaizTeks('kecil')">A-</button>
-                <button onclick="ubahSaizTeks('asal')">A</button>
-                <button onclick="ubahSaizTeks('besar')">A+</button>
+            <button id="btn-text-size" class="btn-a11y" type="button" aria-label="Tetapan saiz teks" aria-controls="popover-a11y" aria-expanded="false">^A</button>
+            <div id="popover-a11y" class="popover hidden" aria-hidden="true">
+                <button type="button" aria-label="Saiz teks kecil" onclick="ubahSaizTeks('kecil')">A-</button>
+                <button type="button" aria-label="Saiz teks asal" onclick="ubahSaizTeks('asal')">A</button>
+                <button type="button" aria-label="Saiz teks besar" onclick="ubahSaizTeks('besar')">A+</button>
             </div>
         </div>
     </div>
 
-    <nav id="side-drawer" class="drawer hidden">
+    <nav id="side-drawer" class="drawer hidden" aria-hidden="true">
         <div class="drawer-header">
             <h2>ANSARASERTING</h2>
-            <button id="btn-tutup-drawer">X</button>
+            <button id="btn-tutup-drawer" type="button" aria-label="Tutup menu">X</button>
         </div>
         <ul class="drawer-menu">
             <li><a href="#">ANSE</a></li>
@@ -42,12 +45,12 @@
         </ul>
         <div class="drawer-footer">
             <p>Tetapan</p>
-            <button id="toggle-tema">Tukar Tema 🌓</button>
+            <button id="toggle-tema" type="button" aria-label="Tukar tema">Tukar Tema 🌓</button>
             <br><br>
             <a href="#">Hubungi webmaster ></a>
         </div>
     </nav>
-    <div id="drawer-backdrop" class="drawer-backdrop hidden"></div>
+    <div id="drawer-backdrop" class="drawer-backdrop hidden" aria-hidden="true"></div>
 
     <main id="scroll-container">
         
@@ -105,17 +108,17 @@
                 </div>
                 
                 <!-- Butang Navigasi Kiri/Kanan -->
-                <button class="carousel-btn prev-btn" id="carousel-prev" aria-label="Slaid Sebelumnya">❮</button>
+                <button class="carousel-btn prev-btn" id="carousel-prev" type="button" aria-label="Slaid Sebelumnya" aria-controls="carousel-track">❮</button>
                 
                 <!-- Bekas Trek Carousel (Data JSON akan masuk sini) -->
-                <div class="carousel-track" id="carousel-track">
+                <div class="carousel-track" id="carousel-track" aria-live="polite">
                     <!-- Placeholder sementara -->
                     <div class="carousel-slide" style="display:flex; justify-content:center; align-items:center; height:100%;">
                         <h2>Memuatkan Program...</h2>
                     </div>
                 </div>
 
-                <button class="carousel-btn next-btn" id="carousel-next" aria-label="Slaid Seterusnya">❯</button>
+                <button class="carousel-btn next-btn" id="carousel-next" type="button" aria-label="Slaid Seterusnya" aria-controls="carousel-track">❯</button>
                 
                 <!-- Titik Penunjuk (Dots) -->
                 <div class="carousel-dots" id="carousel-dots">
@@ -136,7 +139,7 @@
 <!-- SEKSYEN 4: FOOTER & PETA -->
         <section id="seksyen-footer" class="full-screen">
             <!-- Lapisan 1: Peta Latar Belakang -->
-            <div id="footer-map-container" class="footer-map"></div>
+            <div id="footer-map-container" class="footer-map" aria-label="Peta lokasi ANSE"></div>
 
             <!-- Lapisan 2: Panel Info Korporat di Bawah -->
             <div class="footer-panel" id="footer-info-container">
@@ -147,7 +150,7 @@
     </main>
 
     <div id="blok-indikator" class="global-floating bottom-center">
-        <a href="#" id="btn-scroll-indicator" class="indicator-arrow">▼</a>
+        <button id="btn-scroll-indicator" class="indicator-arrow" type="button" aria-label="Skrol ke bahagian seterusnya">▼</button>
     </div>
 
     <script src="js/main.js"></script>

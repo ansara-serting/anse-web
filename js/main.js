@@ -71,30 +71,40 @@ const backdrop = document.getElementById('drawer-backdrop');
 const btnTutupDrawer = document.getElementById('btn-tutup-drawer');
 const btnHamburger = document.getElementById('btn-hamburger');
 
-function bukaDrawer() {
-    if(!drawer || !backdrop) return;
-    drawer.classList.remove('hidden');
-    backdrop.classList.remove('hidden');
-    setTimeout(() => {
+function setDrawerState(isOpen) {
+    if (!drawer || !backdrop || !btnHamburger) return;
+
+    drawer.classList.toggle('hidden', !isOpen);
+    backdrop.classList.toggle('hidden', !isOpen);
+    drawer.setAttribute('aria-hidden', String(!isOpen));
+    backdrop.setAttribute('aria-hidden', String(!isOpen));
+    btnHamburger.setAttribute('aria-expanded', String(isOpen));
+
+    if (isOpen) {
         drawer.classList.add('open');
         backdrop.classList.add('open');
-    }, 10);
+    } else {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+    }
+}
+
+function bukaDrawer() {
+    if(!drawer || !backdrop) return;
+    setDrawerState(true);
 }
 
 function tutupDrawer() {
     if(!drawer || !backdrop) return;
-    drawer.classList.remove('open');
-    backdrop.classList.remove('open');
-    setTimeout(() => {
-        drawer.classList.add('hidden');
-        backdrop.classList.add('hidden');
-    }, 300);
+    setDrawerState(false);
 }
 
 if(btnTutupDrawer) btnTutupDrawer.addEventListener('click', tutupDrawer);
 if(backdrop) backdrop.addEventListener('click', tutupDrawer);
-// Pastikan fungsi ini dipanggil untuk butang hamburger yang baru
-if(btnHamburger) btnHamburger.addEventListener('click', bukaDrawer);
+if(btnHamburger) btnHamburger.addEventListener('click', () => {
+    const isOpen = btnHamburger.getAttribute('aria-expanded') === 'true';
+    setDrawerState(!isOpen);
+});
 
 // =========================================================
 // 3. PENGURUSAN TEMA TERANG / GELAP (DARK MODE)
@@ -125,21 +135,28 @@ const popoverA11y = document.getElementById('popover-a11y');
 let timeoutA11y;
 
 if(btnTextSize && popoverA11y) {
+    const setPopoverState = (isOpen) => {
+        popoverA11y.classList.toggle('hidden', !isOpen);
+        popoverA11y.setAttribute('aria-hidden', String(!isOpen));
+        btnTextSize.setAttribute('aria-expanded', String(isOpen));
+    };
+
     btnTextSize.addEventListener('click', (e) => {
         e.stopPropagation();
-        popoverA11y.classList.toggle('hidden');
+        const isOpen = btnTextSize.getAttribute('aria-expanded') === 'true';
+        setPopoverState(!isOpen);
         clearTimeout(timeoutA11y);
 
-        if (!popoverA11y.classList.contains('hidden')) {
+        if (!isOpen) {
             timeoutA11y = setTimeout(() => {
-                popoverA11y.classList.add('hidden');
+                setPopoverState(false);
             }, 10000);
         }
     });
 
     document.addEventListener('click', (e) => {
         if (!popoverA11y.contains(e.target) && e.target !== btnTextSize) {
-            popoverA11y.classList.add('hidden');
+            setPopoverState(false);
             clearTimeout(timeoutA11y);
         }
     });
@@ -395,8 +412,10 @@ const senaraiSeksyen = [
 ];
 
 if (btnScrollIndicator) {
+    btnScrollIndicator.setAttribute('aria-label', 'Skrol ke bahagian seterusnya');
+
     btnScrollIndicator.addEventListener('click', (e) => {
-        e.preventDefault(); // Halang tingkah laku default link '#'
+        e.preventDefault();
 
         let idSeksyenSeterusnya = null;
 
