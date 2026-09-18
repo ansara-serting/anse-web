@@ -3,6 +3,7 @@
   "no_pendaftaran": "PPM-022-14-14121993-000022",
   "alamat": "MRSM Serting, Bandar Baru Jempol,\n72120 Jempol, Negeri Sembilan.",
   "laman_web": "ANSARASERTING.ORG",
+  "peta_url": "https://www.google.com/maps/search/?api=1&query=MRSM+Serting",
   "pautan_pantas": [
     {"label": "Ansara", "url": "#ansara-serting"},
     {"label": "Buku Gambar", "url": "#galeri"},

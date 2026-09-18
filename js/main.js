@@ -411,19 +411,30 @@ async function muatDataFooter() {
 
             bekasInfo.innerHTML = `
                 <div class="footer-info">
-                    <div class="footer-logo-container">
-                        <img src="assets/logo-anse.png" alt="Logo ANSE">
+                    <div class="footer-brand">
+                        <div class="footer-logo-container">
+                            <img src="assets/logo-anse.png" alt="Logo ANSE">
+                        </div>
+                        <span class="footer-eyebrow">Komuniti ANSE Serting</span>
                     </div>
-                    <p><strong>${data.nama_organisasi}</strong></p>
-                    <p>${data.no_pendaftaran}</p>
-                    <p>${data.alamat.replace(/\n/g, '<br>')}</p>
+                    <h2>${data.nama_organisasi}</h2>
+                    <p class="footer-registration">No. pendaftaran: ${data.no_pendaftaran}</p>
+                    <address>${data.alamat.replace(/\n/g, '<br>')}</address>
                 </div>
                 
                 <div class="footer-links">
-                    <h4>${data.laman_web}</h4>
+                    <p class="footer-eyebrow">Terokai</p>
+                    <h2>${data.laman_web}</h2>
                     <ul>
                         ${pautanHTML}
                     </ul>
+                </div>
+
+                <div class="footer-location">
+                    <p class="footer-eyebrow">Kunjungi kami</p>
+                    <h2>MRSM Serting</h2>
+                    <p>Bandar Baru Jempol, Negeri Sembilan</p>
+                    <a class="footer-map-link" href="${data.peta_url}" target="_blank" rel="noopener">Buka lokasi <span aria-hidden="true">↗</span></a>
                 </div>
             `;
         }
