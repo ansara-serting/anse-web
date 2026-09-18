@@ -9,6 +9,15 @@
     "display_in": ["highlight"]
   },
   {
+    "id": "program-sambutan-ansara",
+    "tajuk": "Sambutan Alumni ANSE 2026",
+    "kategori": "HIGHLIGHT",
+    "kapsyen_klik": "Klik untuk melihat program >",
+    "imej": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=1000",
+    "pautan": "#program-sambutan-ansara",
+    "display_in": ["highlight"]
+  },
+  {
     "id": "kempen-1",
     "tajuk": "Tabung Kebajikan ANSE",
     "keterangan": "Sumbangan ikhlas anda amat bermakna buat ahli keluarga ANSE dan pelajar yang memerlukan bantuan kecemasan.",

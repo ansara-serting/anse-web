@@ -62,8 +62,8 @@
 /* Kiri: Highlight Grid */
 .highlight-grid {
     position: relative;
-    padding: 0; /* Buang padding asal */
-    overflow: hidden; /* Elak gambar melimpah bila zoom */
+    padding: 0;
+    overflow: hidden;
     background-color: #111;
 }
 
@@ -71,9 +71,21 @@
     display: block;
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
     text-decoration: none;
     color: #ffffff;
+    transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+
+.highlight-link-wrapper.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 2;
 }
 
 /* Gambar Latar Belakang (Layer 1) */
@@ -85,7 +97,12 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: scale(1.03);
+    transition: transform 0.9s ease;
+}
+
+.highlight-link-wrapper.active .highlight-bg {
+    animation: highlightImageFade 1.2s ease forwards;
 }
 
 /* Kecerunan Gelap Bawah (Layer 2) */
@@ -94,7 +111,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 70%; /* Tinggi gradient */
+    height: 70%;
     background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
     pointer-events: none;
 }
@@ -110,6 +127,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.highlight-link-wrapper.active .highlight-content {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.15s;
 }
 
 .highlight-content .badge {
@@ -121,6 +147,14 @@
     border-radius: 4px;
     letter-spacing: 1px;
     margin-bottom: 12px;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.highlight-link-wrapper.active .highlight-content .badge {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .highlight-placeholder {
@@ -141,22 +175,49 @@
     margin: 0 0 10px 0;
     line-height: 1.2;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    transform: translateY(16px);
+    opacity: 0;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.highlight-link-wrapper.active .highlight-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
 }
 
 .highlight-caption {
     font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.highlight-link-wrapper.active .highlight-caption {
     opacity: 0.8;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(0);
+    transition-delay: 0.35s;
 }
 
 /* --- ANIMASI HOVER --- */
 .highlight-link-wrapper:hover .highlight-bg {
-    transform: scale(1.08); /* Gambar membesar sedikit ke depan */
+    transform: scale(1.08);
 }
 
 .highlight-link-wrapper:hover .highlight-caption {
     opacity: 1;
-    transform: translateX(5px); /* Kapsyen bergerak sedikit ke kanan */
+    transform: translateX(5px);
+}
+
+@keyframes highlightImageFade {
+    0% {
+        opacity: 0.45;
+        transform: scale(1.06);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.12);
+    }
 }
 
 /* Kanan: Grid Menu Container */

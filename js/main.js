@@ -36,25 +36,67 @@ async function muatDataNavigasi() {
             });
         }
 
-        const beritaHighlight = dataBerita.find(item => Array.isArray(item.display_in) && item.display_in.includes('highlight'));
+        const highlightItems = dataBerita.filter(item => Array.isArray(item.display_in) && item.display_in.includes('highlight'));
         const bekasHighlight = document.getElementById('highlight-grid-container');
-        if (beritaHighlight && bekasHighlight) {
-            bekasHighlight.innerHTML = `
-                <a href="${beritaHighlight.pautan}" class="highlight-link-wrapper">
-                    <div class="highlight-bg" style="background-image: url('${beritaHighlight.imej}');"></div>
+
+        if (bekasHighlight && highlightItems.length) {
+            bekasHighlight.innerHTML = highlightItems.map((item, index) => `
+                <a href="${item.pautan}" class="highlight-link-wrapper ${index === 0 ? 'active' : ''}" data-index="${index}" aria-hidden="${index === 0 ? 'false' : 'true'}">
+                    <div class="highlight-bg" style="background-image: url('${item.imej}');"></div>
                     <div class="highlight-overlay"></div>
                     <div class="highlight-content">
-                        <span class="badge">${beritaHighlight.kategori}</span>
-                        <h2 class="highlight-title">${beritaHighlight.tajuk}</h2>
-                        <small class="highlight-caption">${beritaHighlight.kapsyen_klik}</small>
+                        <span class="badge">${item.kategori}</span>
+                        <h2 class="highlight-title">${item.tajuk}</h2>
+                        <small class="highlight-caption">${item.kapsyen_klik}</small>
                     </div>
                 </a>
-            `;
+            `).join('');
+
+            if (highlightItems.length > 1) {
+                mulakanSlideshowHighlight(highlightItems.length);
+            }
         }
 
     } catch (error) {
         console.error("Gagal memuatkan data JSON:", error);
     }
+}
+
+function mulakanSlideshowHighlight(jumlahHighlight) {
+    const slides = [...document.querySelectorAll('.highlight-link-wrapper')];
+    if (!slides.length || jumlahHighlight <= 1) return;
+
+    let indeksAktif = 0;
+    const tempoh = 10000;
+    let timerId = null;
+
+    const paparkanSlide = (index) => {
+        slides.forEach((slide, i) => {
+            const isActive = i === index;
+            slide.classList.toggle('active', isActive);
+            slide.setAttribute('aria-hidden', String(!isActive));
+        });
+    };
+
+    const mulaTimer = () => {
+        clearInterval(timerId);
+        timerId = setInterval(() => {
+            indeksAktif = (indeksAktif + 1) % slides.length;
+            paparkanSlide(indeksAktif);
+        }, tempoh);
+    };
+
+    const hentikanTimer = () => {
+        clearInterval(timerId);
+    };
+
+    paparkanSlide(indeksAktif);
+    mulaTimer();
+
+    slides.forEach((slide) => {
+        slide.addEventListener('mouseenter', hentikanTimer);
+        slide.addEventListener('mouseleave', mulaTimer);
+    });
 }
 
 // =========================================================
