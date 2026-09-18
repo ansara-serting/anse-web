@@ -1,11 +1,21 @@
 [
   {
+    "id": "jubli-mutiara",
+    "tajuk": "Lensa Jubli Mutiara MRSM Serting 30 Tahun",
+    "kategori": "HIGHLIGHT",
+    "kapsyen_klik": "Klik untuk besarkan paparan >",
+    "imej": "assets/487443956_977266384616813_3680366680998780908_n.jpg",
+    "pautan": "#berita-jubli-mutiara",
+    "display_in": ["highlight"]
+  },
+  {
     "id": "kempen-1",
     "tajuk": "Tabung Kebajikan ANSE",
     "keterangan": "Sumbangan ikhlas anda amat bermakna buat ahli keluarga ANSE dan pelajar yang memerlukan bantuan kecemasan.",
     "imej": "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=1000",
     "label_butang": "Menyumbang Sekarang >",
-    "pautan_butang": "#sumbangan"
+    "pautan_butang": "#sumbangan",
+    "display_in": ["carousel"]
   },
   {
     "id": "program-1",
@@ -13,7 +23,8 @@
     "keterangan": "Merapatkan ukhuwah di bulan mulia. Berkumpul, berbuka bersama, dan mengimbau kenangan di MRSM Serting.",
     "imej": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1000",
     "label_butang": "Lihat Galeri >",
-    "pautan_butang": "#galeri"
+    "pautan_butang": "#galeri",
+    "display_in": ["carousel"]
   },
   {
     "id": "program-mockup-interview-2026",
@@ -21,7 +32,8 @@
     "keterangan": "Melalui program ini, para pelajar telah didedahkan dengan pengalaman sebenar sesi temuduga, termasuk teknik menjawab soalan dengan yakin, cara berkomunikasi secara profesional serta penyediaan diri dari aspek penampilan dan bahasa badan.",
     "imej": "assets/mockup-interview-2026.png",
     "label_butang": "Lihat Berita Ini >",
-    "pautan_butang": "#program-mockup-interview-2026"
+    "pautan_butang": "#program-mockup-interview-2026",
+    "display_in": ["carousel"]
   },
   {
     "id": "program-abdc-2026",
@@ -29,14 +41,7 @@
     "keterangan": "Seramai 47 orang sukarelawan telah berganding bahu menjayakan program ini, terdiri daripada 33 pelajar dan guru MRSM Serting, 7 wakil ANSE, serta 7 wakil NGO.",
     "imej": "assets/abdc-2026.jpg",
     "label_butang": "Lihat Berita Ini >",
-    "pautan_butang": "#program-abdc-2026"
-  },
-  {
-    "id": "program-1",
-    "tajuk": "Iftar Perdana Alumni 2026",
-    "keterangan": "Merapatkan ukhuwah di bulan mulia. Berkumpul, berbuka bersama, dan mengimbau kenangan di MRSM Serting.",
-    "imej": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1000",
-    "label_butang": "Lihat Galeri >",
-    "pautan_butang": "#galeri"
+    "pautan_butang": "#program-abdc-2026",
+    "display_in": ["carousel"]
   }
 ]

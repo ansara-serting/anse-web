@@ -13,14 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // =========================================================
 async function muatDataNavigasi() {
     try {
-        // Tarik data dari folder data/
         const responMenu = await fetch('./data/grid_menu.json');
         const dataMenu = await responMenu.json();
-        
-        const responBerita = await fetch('./data/berita.json');
+
+        const responBerita = await fetch('./data/content.json');
         const dataBerita = await responBerita.json();
 
-        // Suntik Data Grid Menu
         const bekasMenu = document.querySelector('.grid-menu-4');
         if (bekasMenu) {
             bekasMenu.innerHTML = ''; 
@@ -38,17 +36,13 @@ async function muatDataNavigasi() {
             });
         }
 
-        // Suntik Data Highlight
-        const beritaHighlight = dataBerita.find(b => b.aktif_di_highlight);
+        const beritaHighlight = dataBerita.find(item => Array.isArray(item.display_in) && item.display_in.includes('highlight'));
         const bekasHighlight = document.getElementById('highlight-grid-container');
         if (beritaHighlight && bekasHighlight) {
             bekasHighlight.innerHTML = `
                 <a href="${beritaHighlight.pautan}" class="highlight-link-wrapper">
-                    <!-- Layer 1: Gambar Latar -->
                     <div class="highlight-bg" style="background-image: url('${beritaHighlight.imej}');"></div>
-                    <!-- Layer 2: Kecerunan Gelap (Gradient) -->
                     <div class="highlight-overlay"></div>
-                    <!-- Layer 3: Teks -->
                     <div class="highlight-content">
                         <span class="badge">${beritaHighlight.kategori}</span>
                         <h2 class="highlight-title">${beritaHighlight.tajuk}</h2>
@@ -189,21 +183,25 @@ let jumlahSlaid = 0;
 
 async function muatDataCarousel() {
     try {
-        const respon = await fetch('./data/carousel.json');
+        const respon = await fetch('./data/content.json');
         const dataCarousel = await respon.json();
-        jumlahSlaid = dataCarousel.length;
+        const slideItems = dataCarousel.filter(item => Array.isArray(item.display_in) && item.display_in.includes('carousel'));
+        jumlahSlaid = slideItems.length;
 
         const track = document.getElementById('carousel-track');
         const dotsContainer = document.getElementById('carousel-dots');
-        
+
         if (!track || !dotsContainer) return;
 
-        track.innerHTML = ''; // Kosongkan placeholder HTML
-        dotsContainer.innerHTML = ''; // Kosongkan dots lama
+        track.innerHTML = '';
+        dotsContainer.innerHTML = '';
 
-        // Suntik data JSON ke dalam HTML
-        dataCarousel.forEach((item, index) => {
-            // Bina Slaid
+        if (!slideItems.length) {
+            track.innerHTML = '<div class="carousel-slide" style="display:flex; justify-content:center; align-items:center; height:100%;"><h2>Tiada program ditunjukkan.</h2></div>';
+            return;
+        }
+
+        slideItems.forEach((item, index) => {
             track.innerHTML += `
                 <div class="carousel-slide">
                     <div class="slide-bg" style="background-image: url('${item.imej}');"></div>
@@ -216,20 +214,17 @@ async function muatDataCarousel() {
                 </div>
             `;
 
-            // Bina Titik Navigasi (Dots)
             dotsContainer.innerHTML += `
                 <div class="dot ${index === 0 ? 'active' : ''}" onclick="pergiKeSlaid(${index})"></div>
             `;
         });
 
-        // Pasang pendengar klik (Event Listeners) untuk butang Kiri/Kanan
         const btnNext = document.getElementById('carousel-next');
         const btnPrev = document.getElementById('carousel-prev');
-        
+
         if (btnNext) btnNext.addEventListener('click', slaidSeterusnya);
         if (btnPrev) btnPrev.addEventListener('click', slaidSebelumnya);
 
-        // --- TAMBAH KOD SWIPE (TOUCH) DI SINI ---
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -243,17 +238,14 @@ async function muatDataCarousel() {
         }, { passive: true });
 
         function handleSwipe() {
-            const threshold = 50; // Jarak minima (pixel) untuk dikira sebagai swipe
+            const threshold = 50;
             if (touchEndX < touchStartX - threshold) {
-                // Swipe ke kiri (Slaid Seterusnya)
                 slaidSeterusnya();
             }
             if (touchEndX > touchStartX + threshold) {
-                // Swipe ke kanan (Slaid Sebelumnya)
                 slaidSebelumnya();
             }
         }
-        // --- TAMAT KOD SWIPE ---
 
     } catch (error) {
         console.error("Gagal memuatkan data Carousel JSON:", error);
