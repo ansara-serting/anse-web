@@ -3,18 +3,24 @@
     "id": "jubli-mutiara",
     "tajuk": "Lensa Jubli Mutiara MRSM Serting 30 Tahun",
     "kategori": "HIGHLIGHT",
-    "kapsyen_klik": "Klik untuk besarkan paparan >",
     "imej": "assets/487443956_977266384616813_3680366680998780908_n.jpg",
     "pautan": "#berita-jubli-mutiara",
+    "keterangan": "Jubli Mutiara MRSM Serting 30 Tahun telah pun berlangsung pada Februari 2025.",
+    "highlight_lighbox_butang": {
+      "url": "#berita-jubli-mutiara"
+    },
     "display_in": ["highlight"]
   },
   {
     "id": "program-takeanse-2026",
     "tajuk": "TakeANSE 2026",
     "kategori": "HIGHLIGHT",
-    "kapsyen_klik": "Klik untuk melihat program >",
     "imej": "assets/639685897_1239808568362592_7585828619519352993_n.jpg",
     "pautan": "#program-takeanse-2026",
+    "keterangan": "TakeANSE 2026 telah berlangsung pada Mac 2026.",
+    "highlight_lighbox_butang": {
+      "url": "#program-takeanse-2026"
+    },
     "display_in": ["highlight"]
   },
   {
@@ -22,8 +28,10 @@
     "tajuk": "Tabung Kebajikan ANSE",
     "keterangan": "Sumbangan ikhlas anda amat bermakna buat ahli keluarga ANSE dan pelajar yang memerlukan bantuan kecemasan.",
     "imej": "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=1000",
-    "label_butang": "Menyumbang Sekarang >",
-    "pautan_butang": "#sumbangan",
+    "carousel_butang": {
+      "url": "#sumbangan",
+      "butang_teks": "Menyumbang Sekarang >"
+    },
     "display_in": ["carousel"]
   },
   {
@@ -31,8 +39,10 @@
     "tajuk": "Iftar Perdana Alumni 2026",
     "keterangan": "Merapatkan ukhuwah di bulan mulia. Berkumpul, berbuka bersama, dan mengimbau kenangan di MRSM Serting.",
     "imej": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1000",
-    "label_butang": "Lihat Galeri >",
-    "pautan_butang": "#galeri",
+    "carousel_butang": {
+      "url": "#galeri",
+      "butang_teks": "Lihat Galeri >"
+    },
     "display_in": ["carousel"]
   },
   {
@@ -40,8 +50,10 @@
     "tajuk": "Mockup Interview 2026",
     "keterangan": "Melalui program ini, para pelajar telah didedahkan dengan pengalaman sebenar sesi temuduga, termasuk teknik menjawab soalan dengan yakin, cara berkomunikasi secara profesional serta penyediaan diri dari aspek penampilan dan bahasa badan.",
     "imej": "assets/mockup-interview-2026.png",
-    "label_butang": "Lihat Berita Ini >",
-    "pautan_butang": "#program-mockup-interview-2026",
+    "carousel_butang": {
+      "url": "#program-mockup-interview-2026",
+      "butang_teks": "Lihat Berita Ini >"
+    },
     "display_in": ["carousel"]
   },
   {
@@ -49,8 +61,10 @@
     "tajuk": "Ansara Blood Donation Campaign 2026",
     "keterangan": "Seramai 47 orang sukarelawan telah berganding bahu menjayakan program ini, terdiri daripada 33 pelajar dan guru MRSM Serting, 7 wakil ANSE, serta 7 wakil NGO.",
     "imej": "assets/abdc-2026.jpg",
-    "label_butang": "Lihat Berita Ini >",
-    "pautan_butang": "#program-abdc-2026",
+    "carousel_butang": {
+      "url": "#program-abdc-2026",
+      "butang_teks": "Lihat Berita Ini >"
+    },
     "display_in": ["carousel"]
   },
   {
@@ -58,8 +72,10 @@
     "tajuk": "Mahu lihat senarai berita lama MRSM Serting? Jom ke Balai Arkib!",
     "keterangan": "Selami kenangan lalu dan ikuti perkembangan sejarah kita. Semua koleksi artikel, buletin, dan liputan program terdahulu ANSARA Serting tersimpan kemas di sini.",
     "imej": "assets/15926659-casete-5132271.jpg",
-    "label_butang": "Lihat Berita Ini >",
-    "pautan_butang": "#balai-arkib",
+    "carousel_butang": {
+      "url": "#balai-arkib",
+      "butang_teks": "Lihat Berita Ini >"
+    },
     "display_in": ["carousel"]
   }
 ]

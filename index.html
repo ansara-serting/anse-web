@@ -36,18 +36,11 @@
             <button id="btn-tutup-drawer" type="button" aria-label="Tutup menu">X</button>
         </div>
         <ul class="drawer-menu">
-            <li><a href="#">ANSE</a></li>
-            <li><a href="#">Buku Gambar</a></li>
-            <li><a href="#">Keahlian</a></li>
-            <li><a href="#">Hubungi Kami</a></li>
-            <li><a href="#">Berita</a></li>
-            <li><a href="#">Sumbangan</a></li>
+            <li>Memuatkan menu...</li>
         </ul>
         <div class="drawer-footer">
             <p>Tetapan</p>
             <button id="toggle-tema" type="button" aria-label="Tukar tema">Tukar Tema 🌓</button>
-            <br><br>
-            <a href="#">Hubungi webmaster ></a>
         </div>
     </nav>
     <div id="drawer-backdrop" class="drawer-backdrop hidden" aria-hidden="true"></div>
@@ -151,6 +144,23 @@
 
     <div id="blok-indikator" class="global-floating bottom-center">
         <button id="btn-scroll-indicator" class="indicator-arrow" type="button" aria-label="Skrol ke bahagian seterusnya">▼</button>
+    </div>
+
+    <div id="highlight-lightbox" class="highlight-lightbox hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+        <div class="lightbox-backdrop" data-lightbox-close></div>
+        <div class="lightbox-panel">
+            <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Tutup highlight">X</button>
+            <div id="lightbox-image-backdrop" class="lightbox-image-backdrop" aria-hidden="true"></div>
+            <figure class="lightbox-figure">
+                <img id="lightbox-image" class="lightbox-image" alt="">
+                <figcaption class="lightbox-caption">
+                    <span id="lightbox-category" class="badge"></span>
+                    <h2 id="lightbox-title"></h2>
+                    <p id="lightbox-description"></p>
+                    <a id="lightbox-action" class="btn-utama" href="#"></a>
+                </figcaption>
+            </figure>
+        </div>
     </div>
 
     <script src="js/main.js"></script>

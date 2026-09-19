@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ansara",
+    "label": "ANSE",
+    "url": "#seksyen-navigasi",
+    "active_in_menu": ["drawer", "footer"]
+  },
+  {
+    "id": "galeri",
+    "label": "Buku Gambar",
+    "url": "#seksyen-carousel",
+    "active_in_menu": ["drawer", "footer"]
+  },
+  {
+    "id": "keahlian",
+    "label": "Keahlian",
+    "url": "#seksyen-navigasi",
+    "active_in_menu": ["drawer", "footer"]
+  },
+  {
+    "id": "hubungi",
+    "label": "Hubungi Kami",
+    "url": "#seksyen-footer",
+    "active_in_menu": ["drawer", "footer"]
+  },
+  {
+    "id": "berita",
+    "label": "Berita",
+    "url": "#seksyen-carousel",
+    "active_in_menu": ["drawer", "footer"]
+  },
+  {
+    "id": "sumbangan",
+    "label": "Sumbangan",
+    "url": "#seksyen-carousel",
+    "active_in_menu": ["drawer", "footer"]
+  },
+  {
+    "id": "arkib",
+    "label": "Balai Arkib",
+    "url": "#arkib",
+    "active_in_menu": ["footer"]
+  },
+  {
+    "id": "belasungkawa",
+    "label": "Belasungkawa",
+    "url": "#belasungkawa",
+    "active_in_menu": ["footer"]
+  },
+  {
+    "id": "mrsm-serting",
+    "label": "MRSM Serting",
+    "url": "http://serting.mrsm.edu.my/index.html",
+    "active_in_menu": ["footer"]
+  },
+  {
+    "id": "webmaster",
+    "label": "Hubungi webmaster",
+    "url": "#hubungi",
+    "active_in_menu": ["drawer"]
+  }
+]
