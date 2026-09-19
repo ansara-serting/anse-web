@@ -537,7 +537,7 @@ function kemaskiniPaparanCarousel() {
     });
 }
 
-// TAMBAH BARIS INI: Pastikan margin dikira semula jika pengguna sengetkan phone/resize browser
+// Memastikan margin dikira semula jika pengguna sengetkan phone/resize browser
 window.addEventListener('resize', kemaskiniPaparanCarousel);
 
 function slaidSeterusnya() {
@@ -691,10 +691,18 @@ if (btnScrollIndicator) {
 
 // --- KOD BARU: PEMANTAU FOOTER (Intersection Observer) ---
 const footerSeksyen = document.getElementById('seksyen-footer');
+let footerIsVisible = false;
+const footerViewport = window.matchMedia('(max-width: 768px)');
+
+function syncMobileFooterControls() {
+    mobileHighlightOpen?.classList.toggle('footer-is-visible', footerViewport.matches && footerIsVisible);
+}
 
 if (footerSeksyen && btnScrollIndicator) {
     const footerObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            footerIsVisible = entry.isIntersecting;
+            syncMobileFooterControls();
             if (entry.isIntersecting) {
                 // Apabila Footer kelihatan di skrin
                 // Kita balut teks dengan span supaya boleh disorok di mobile, dan tambah title untuk tooltip
@@ -714,3 +722,6 @@ if (footerSeksyen && btnScrollIndicator) {
 
     footerObserver.observe(footerSeksyen);
 }
+
+footerViewport.addEventListener('change', syncMobileFooterControls);
+window.addEventListener('resize', syncMobileFooterControls);
