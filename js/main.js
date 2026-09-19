@@ -58,6 +58,18 @@ async function muatDataNavigasi() {
                 </a>
             `).join('');
 
+            mobileHighlightClose = document.createElement('button');
+            mobileHighlightClose.type = 'button';
+            mobileHighlightClose.className = 'mobile-highlight-close';
+            mobileHighlightClose.setAttribute('aria-label', 'Tutup sorotan');
+            mobileHighlightClose.textContent = 'X';
+            bekasHighlight.appendChild(mobileHighlightClose);
+            bekasHighlight.setAttribute('role', 'dialog');
+            bekasHighlight.setAttribute('aria-modal', 'true');
+            bekasHighlight.setAttribute('aria-hidden', 'false');
+            bekasHighlight.setAttribute('aria-label', 'Sorotan ANSE');
+            mobileHighlightClose.addEventListener('click', tutupMobileHighlight);
+
             if (highlightItems.length > 1) {
                 const controls = document.createElement('div');
                 controls.id = 'highlight-controls';
@@ -86,7 +98,10 @@ const lightboxCategory = document.getElementById('lightbox-category');
 const lightboxTitle = document.getElementById('lightbox-title');
 const lightboxDescription = document.getElementById('lightbox-description');
 const lightboxAction = document.getElementById('lightbox-action');
+const mobileHighlightOpen = document.getElementById('mobile-highlight-open');
+const mobileHighlight = document.getElementById('highlight-grid-container');
 let lightboxPreviousFocus = null;
+let mobileHighlightClose = null;
 let highlightLightboxButtonText = '';
 let hentikanHighlightPlayback = () => {};
 let teruskanHighlightPlayback = () => {};
@@ -140,8 +155,43 @@ highlightLightbox?.querySelector('[data-lightbox-close]')?.addEventListener('cli
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && highlightLightbox?.getAttribute('aria-hidden') === 'false') {
         tutupLightbox();
+    } else if (event.key === 'Escape' && mobileHighlight?.getAttribute('aria-hidden') === 'false') {
+        tutupMobileHighlight();
     }
 });
+
+function bukaMobileHighlight() {
+    if (!mobileHighlight || !mobileHighlightOpen) return;
+
+    mobileHighlight.classList.remove('hidden');
+    mobileHighlight.setAttribute('aria-hidden', 'false');
+    mobileHighlightOpen.setAttribute('aria-expanded', 'true');
+    mobileHighlightClose?.focus();
+}
+
+function tutupMobileHighlight() {
+    if (!mobileHighlight || !mobileHighlightOpen) return;
+
+    mobileHighlight.classList.add('hidden');
+    mobileHighlight.setAttribute('aria-hidden', 'true');
+    mobileHighlightOpen.setAttribute('aria-expanded', 'false');
+    mobileHighlightOpen.focus();
+}
+
+mobileHighlightOpen?.addEventListener('click', bukaMobileHighlight);
+
+const mobileHighlightViewport = window.matchMedia('(max-width: 768px)');
+const syncMobileHighlightLayout = () => {
+    const isPortraitMobile = mobileHighlightViewport.matches && window.innerHeight >= window.innerWidth;
+    if (!mobileHighlight || isPortraitMobile) return;
+
+    mobileHighlight.classList.remove('hidden');
+    mobileHighlight.setAttribute('aria-hidden', 'false');
+    mobileHighlightOpen?.setAttribute('aria-expanded', 'false');
+};
+
+mobileHighlightViewport.addEventListener('change', syncMobileHighlightLayout);
+window.addEventListener('resize', syncMobileHighlightLayout);
 
 function binaPautanMenu(pautan, namaMenu) {
     return pautan
