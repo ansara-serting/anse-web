@@ -23,6 +23,7 @@ async function muatDataNavigasi() {
         const dataBerita = await responBerita.json();
         const tetapan = await responTetapan.json();
         const kapsyenHighlight = tetapan.grid_highlight_kapsyen_klik;
+        const highlightInterval = Number(tetapan.grid_highlight_interval_ms);
         highlightLightboxButtonText = tetapan.highlight_lighbox_butang_teks;
 
         const bekasMenu = document.querySelector('.grid-menu-4');
@@ -80,7 +81,7 @@ async function muatDataNavigasi() {
                 `).join('');
                 bekasHighlight.appendChild(controls);
                 mulakanLightboxHighlight(highlightItems);
-                mulakanSlideshowHighlight(highlightItems.length);
+                mulakanSlideshowHighlight(highlightItems.length, highlightInterval);
             }
             if (highlightItems.length === 1) mulakanLightboxHighlight(highlightItems);
         }
@@ -212,13 +213,15 @@ async function muatDataDrawer() {
     }
 }
 
-function mulakanSlideshowHighlight(jumlahHighlight) {
+function mulakanSlideshowHighlight(jumlahHighlight, highlightInterval) {
     const slides = [...document.querySelectorAll('.highlight-link-wrapper')];
     const dots = [...document.querySelectorAll('.highlight-dot')];
     if (!slides.length || jumlahHighlight <= 1) return;
 
     let indeksAktif = 0;
-    const tempoh = 10000;
+    const tempoh = Number.isFinite(highlightInterval) && highlightInterval > 0
+        ? highlightInterval
+        : 10000;
     let timerId = null;
     const controls = document.getElementById('highlight-controls');
 
@@ -230,10 +233,11 @@ function mulakanSlideshowHighlight(jumlahHighlight) {
         });
         dots.forEach((dot, i) => {
             const isActive = i === index;
-            dot.classList.remove('active');
             dot.setAttribute('aria-current', String(isActive));
+            dot.classList.remove('active');
             if (isActive) {
                 dot.style.setProperty('--highlight-duration', `${tempoh}ms`);
+                void dot.offsetWidth;
                 dot.classList.add('active');
             }
         });

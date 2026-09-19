@@ -235,14 +235,16 @@
 .highlight-dot::after {
     content: '';
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
     background: var(--kuning-anse);
-    transform: scaleX(0);
-    transform-origin: left;
 }
 
 .highlight-dot.active::after {
     animation: highlightProgress var(--highlight-duration, 10000ms) linear forwards;
+    animation-play-state: running;
 }
 
 .highlight-controls.is-paused .highlight-dot.active::after {
@@ -251,7 +253,7 @@
 
 .highlight-dot:hover,
 .highlight-dot:focus-visible {
-    background: var(--kuning-anse);
+    transform: translateY(-1px);
 }
 
 .highlight-dot:focus-visible {
@@ -265,14 +267,14 @@
 }
 
 @keyframes highlightProgress {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
+    from { width: 0; }
+    to { width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .highlight-dot.active::after {
         animation: none;
-        transform: scaleX(1);
+        width: 100%;
     }
 }
 
@@ -671,10 +673,14 @@ body.dark-theme .btn-hamburger {
     cursor: pointer;
 }
 
-#btn-tutup-drawer img {
+#btn-tutup-drawer svg {
     display: block;
     width: 100%;
     height: 100%;
+}
+
+body.dark-theme #btn-tutup-drawer {
+    color: var(--kuning-anse);
 }
 
 #btn-tutup-drawer:hover {
