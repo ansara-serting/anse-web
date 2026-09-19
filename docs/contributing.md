@@ -28,7 +28,7 @@ Laman web ini menggunakan fail data ringkas berformat `.json` dalam folder `data
 
 ## 🐛 3. Melaporkan Masalah (Bug Report)
 Jika anda menjumpai sebarang masalah (teks terpotong, butang tak boleh tekan, paparan senget di telefon):
-1. Pergi ke tab **[Issues](../../issues)** di GitHub.
+1. Pergi ke tab **[Issues](https://github.com/ansara-serting/anse-web/issues)** di GitHub.
 2. Klik butang **New Issue**.
 3. Jelaskan masalah tersebut beserta:
    * Jenis peranti (contoh: *iPhone 13* / *Samsung Tab S8*)
