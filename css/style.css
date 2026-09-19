@@ -201,12 +201,74 @@
 
 /* --- ANIMASI HOVER --- */
 .highlight-link-wrapper:hover .highlight-bg {
-    transform: scale(1.08);
+    animation: none;
+    transform: scale(1.12) rotate(2deg);
 }
 
 .highlight-link-wrapper:hover .highlight-caption {
     opacity: 1;
     transform: translateX(5px);
+}
+
+.highlight-controls {
+    position: absolute;
+    left: 30px;
+    bottom: 22px;
+    z-index: 4;
+    display: flex;
+    gap: 8px;
+}
+
+.highlight-dot {
+    position: relative;
+    width: 34px;
+    height: 4px;
+    padding: 0;
+    border: 0;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.highlight-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--kuning-anse);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.highlight-dot.active::after {
+    animation: highlightProgress var(--highlight-duration, 10000ms) linear forwards;
+}
+
+.highlight-controls.is-paused .highlight-dot.active::after {
+    animation-play-state: paused;
+}
+
+.highlight-dot:hover,
+.highlight-dot:focus-visible {
+    background: var(--kuning-anse);
+}
+
+.highlight-dot:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 4px;
+}
+
+@keyframes highlightProgress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .highlight-dot.active::after {
+        animation: none;
+        transform: scaleX(1);
+    }
 }
 
 @keyframes highlightImageFade {
@@ -497,6 +559,13 @@ body.dark-theme .btn-hamburger {
     color: var(--kuning-anse);
 }
 
+.drawer-menu li a:focus-visible,
+#btn-tutup-drawer:focus-visible,
+#toggle-tema:focus-visible {
+    outline: 2px solid var(--kuning-anse);
+    outline-offset: 4px;
+}
+
 .drawer-footer {
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 15px;
@@ -585,6 +654,101 @@ body.dark-theme .btn-hamburger {
 
 .hidden {
     display: none !important;
+}
+
+/* ==========================================================================
+   8. LIGHTBOX HIGHLIGHT
+   ========================================================================== */
+.highlight-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    color: #ffffff;
+}
+
+.lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.78);
+    backdrop-filter: blur(14px);
+}
+
+.lightbox-panel {
+    position: relative;
+    z-index: 1;
+    width: min(920px, 94vw);
+    max-height: 92vh;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    background: rgba(18, 20, 25, 0.66);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(18px);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 3;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.lightbox-image-backdrop {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    filter: blur(24px);
+    opacity: 0.24;
+    transform: scale(1.08);
+}
+
+.lightbox-figure {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 18px;
+    max-height: 92vh;
+    margin: 0;
+    padding: 32px;
+}
+
+.lightbox-image {
+    display: block;
+    width: 100%;
+    max-height: 66vh;
+    object-fit: contain;
+}
+
+.lightbox-caption {
+    padding: 0 8px 4px;
+}
+
+.lightbox-caption .badge {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.lightbox-caption h2 {
+    margin: 0 0 8px;
+    color: var(--kuning-anse);
+    font-size: clamp(1.35rem, 3vw, 2.2rem);
+}
+
+.lightbox-caption p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
 }
 
 /* ==========================================================================

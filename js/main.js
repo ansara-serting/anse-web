@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     muatDataNavigasi();
     muatDataCarousel();
     muatDataTrivia();
+    muatDataDrawer();
     muatDataFooter();
     initTema();        
     initSaizTeks();    
@@ -13,11 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
 // =========================================================
 async function muatDataNavigasi() {
     try {
-        const responMenu = await fetch('./data/grid_menu.json');
+        const [responMenu, responBerita, responTetapan] = await Promise.all([
+            fetch('./data/grid_menu.json'),
+            fetch('./data/content.json'),
+            fetch('./data/settings.json')
+        ]);
         const dataMenu = await responMenu.json();
-
-        const responBerita = await fetch('./data/content.json');
         const dataBerita = await responBerita.json();
+        const tetapan = await responTetapan.json();
+        const kapsyenHighlight = tetapan.grid_highlight_kapsyen_klik;
+        highlightLightboxButtonText = tetapan.highlight_lighbox_butang_teks;
 
         const bekasMenu = document.querySelector('.grid-menu-4');
         if (bekasMenu) {
@@ -47,14 +53,24 @@ async function muatDataNavigasi() {
                     <div class="highlight-content">
                         <span class="badge">${item.kategori}</span>
                         <h2 class="highlight-title">${item.tajuk}</h2>
-                        <small class="highlight-caption">${item.kapsyen_klik}</small>
+                        <small class="highlight-caption">${kapsyenHighlight}</small>
                     </div>
                 </a>
             `).join('');
 
             if (highlightItems.length > 1) {
+                const controls = document.createElement('div');
+                controls.id = 'highlight-controls';
+                controls.className = 'highlight-controls';
+                controls.setAttribute('aria-label', 'Navigasi highlight');
+                controls.innerHTML = highlightItems.map((item, index) => `
+                    <button type="button" class="highlight-dot ${index === 0 ? 'active' : ''}" data-index="${index}" aria-label="Papar highlight ${index + 1}" aria-current="${index === 0 ? 'true' : 'false'}"></button>
+                `).join('');
+                bekasHighlight.appendChild(controls);
+                mulakanLightboxHighlight(highlightItems);
                 mulakanSlideshowHighlight(highlightItems.length);
             }
+            if (highlightItems.length === 1) mulakanLightboxHighlight(highlightItems);
         }
 
     } catch (error) {
@@ -62,13 +78,99 @@ async function muatDataNavigasi() {
     }
 }
 
+const highlightLightbox = document.getElementById('highlight-lightbox');
+const lightboxClose = document.getElementById('lightbox-close');
+const lightboxImageBackdrop = document.getElementById('lightbox-image-backdrop');
+const lightboxImage = document.getElementById('lightbox-image');
+const lightboxCategory = document.getElementById('lightbox-category');
+const lightboxTitle = document.getElementById('lightbox-title');
+const lightboxDescription = document.getElementById('lightbox-description');
+const lightboxAction = document.getElementById('lightbox-action');
+let lightboxPreviousFocus = null;
+let highlightLightboxButtonText = '';
+let hentikanHighlightPlayback = () => {};
+let teruskanHighlightPlayback = () => {};
+
+function bukaLightbox(item, trigger) {
+    if (!highlightLightbox || !lightboxImage) return;
+
+    hentikanHighlightPlayback();
+    lightboxPreviousFocus = trigger;
+    lightboxImage.src = item.imej;
+    lightboxImage.alt = item.tajuk;
+    lightboxImageBackdrop.style.backgroundImage = `url('${item.imej}')`;
+    lightboxCategory.textContent = item.kategori;
+    lightboxTitle.textContent = item.tajuk;
+    lightboxDescription.textContent = item.keterangan || '';
+    if (lightboxAction) {
+        lightboxAction.href = item.highlight_lighbox_butang?.url || item.pautan;
+        lightboxAction.textContent = highlightLightboxButtonText;
+        lightboxAction.classList.toggle('hidden', !lightboxAction.textContent);
+    }
+    highlightLightbox.classList.remove('hidden');
+    highlightLightbox.setAttribute('aria-hidden', 'false');
+    lightboxClose?.focus();
+}
+
+function tutupLightbox() {
+    if (!highlightLightbox) return;
+
+    highlightLightbox.classList.add('hidden');
+    highlightLightbox.setAttribute('aria-hidden', 'true');
+    lightboxImage?.removeAttribute('src');
+    lightboxImageBackdrop?.style.removeProperty('background-image');
+    lightboxAction?.classList.add('hidden');
+    lightboxPreviousFocus?.focus();
+    lightboxPreviousFocus = null;
+    teruskanHighlightPlayback();
+}
+
+function mulakanLightboxHighlight(highlightItems) {
+    const slides = document.querySelectorAll('.highlight-link-wrapper');
+    slides.forEach((slide, index) => {
+        slide.addEventListener('click', (event) => {
+            event.preventDefault();
+            bukaLightbox(highlightItems[index], slide);
+        });
+    });
+}
+
+lightboxClose?.addEventListener('click', tutupLightbox);
+highlightLightbox?.querySelector('[data-lightbox-close]')?.addEventListener('click', tutupLightbox);
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && highlightLightbox?.getAttribute('aria-hidden') === 'false') {
+        tutupLightbox();
+    }
+});
+
+function binaPautanMenu(pautan, namaMenu) {
+    return pautan
+        .filter(item => Array.isArray(item.active_in_menu) && item.active_in_menu.includes(namaMenu))
+        .map(item => `<li><a href="${item.url}">${item.label}</a></li>`)
+        .join('');
+}
+
+async function muatDataDrawer() {
+    try {
+        const respon = await fetch('./data/menu_links.json');
+        const pautan = await respon.json();
+        const menuDrawer = document.querySelector('.drawer-menu');
+
+        if (menuDrawer) menuDrawer.innerHTML = binaPautanMenu(pautan, 'drawer');
+    } catch (error) {
+        console.error("Gagal memuatkan pautan menu JSON:", error);
+    }
+}
+
 function mulakanSlideshowHighlight(jumlahHighlight) {
     const slides = [...document.querySelectorAll('.highlight-link-wrapper')];
+    const dots = [...document.querySelectorAll('.highlight-dot')];
     if (!slides.length || jumlahHighlight <= 1) return;
 
     let indeksAktif = 0;
     const tempoh = 10000;
     let timerId = null;
+    const controls = document.getElementById('highlight-controls');
 
     const paparkanSlide = (index) => {
         slides.forEach((slide, i) => {
@@ -76,10 +178,20 @@ function mulakanSlideshowHighlight(jumlahHighlight) {
             slide.classList.toggle('active', isActive);
             slide.setAttribute('aria-hidden', String(!isActive));
         });
+        dots.forEach((dot, i) => {
+            const isActive = i === index;
+            dot.classList.remove('active');
+            dot.setAttribute('aria-current', String(isActive));
+            if (isActive) {
+                dot.style.setProperty('--highlight-duration', `${tempoh}ms`);
+                dot.classList.add('active');
+            }
+        });
     };
 
     const mulaTimer = () => {
         clearInterval(timerId);
+        controls?.classList.remove('is-paused');
         timerId = setInterval(() => {
             indeksAktif = (indeksAktif + 1) % slides.length;
             paparkanSlide(indeksAktif);
@@ -88,6 +200,12 @@ function mulakanSlideshowHighlight(jumlahHighlight) {
 
     const hentikanTimer = () => {
         clearInterval(timerId);
+        controls?.classList.add('is-paused');
+    };
+
+    hentikanHighlightPlayback = hentikanTimer;
+    teruskanHighlightPlayback = () => {
+        if (highlightLightbox?.getAttribute('aria-hidden') !== 'false') mulaTimer();
     };
 
     paparkanSlide(indeksAktif);
@@ -96,6 +214,20 @@ function mulakanSlideshowHighlight(jumlahHighlight) {
     slides.forEach((slide) => {
         slide.addEventListener('mouseenter', hentikanTimer);
         slide.addEventListener('mouseleave', mulaTimer);
+        slide.addEventListener('focusin', hentikanTimer);
+        slide.addEventListener('focusout', (event) => {
+            if (!slide.contains(event.relatedTarget)) mulaTimer();
+        });
+    });
+
+    dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+            indeksAktif = Number(dot.dataset.index);
+            paparkanSlide(indeksAktif);
+            mulaTimer();
+        });
+        dot.addEventListener('mouseenter', hentikanTimer);
+        dot.addEventListener('mouseleave', mulaTimer);
     });
 }
 
@@ -137,9 +269,22 @@ function tutupDrawer() {
 
 if(btnTutupDrawer) btnTutupDrawer.addEventListener('click', tutupDrawer);
 if(backdrop) backdrop.addEventListener('click', tutupDrawer);
+const menuDrawer = document.querySelector('.drawer-menu');
+if (menuDrawer) {
+    menuDrawer.addEventListener('click', (event) => {
+        if (event.target.closest('a')) tutupDrawer();
+    });
+}
 if(btnHamburger) btnHamburger.addEventListener('click', () => {
     const isOpen = btnHamburger.getAttribute('aria-expanded') === 'true';
     setDrawerState(!isOpen);
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && btnHamburger?.getAttribute('aria-expanded') === 'true') {
+        tutupDrawer();
+        btnHamburger.focus();
+    }
 });
 
 // =========================================================
@@ -251,7 +396,7 @@ async function muatDataCarousel() {
                     <div class="slide-content">
                         <h2>${item.tajuk}</h2>
                         <p>${item.keterangan}</p>
-                        <a href="${item.pautan_butang}" class="btn-utama">${item.label_butang}</a>
+                        <a href="${item.carousel_butang.url}" class="btn-utama">${item.carousel_butang.butang_teks}</a>
                     </div>
                 </div>
             `;
@@ -393,8 +538,12 @@ async function muatDataTrivia() {
 // =========================================================
 async function muatDataFooter() {
     try {
-        const respon = await fetch('./data/footer.json');
-        const data = await respon.json();
+        const [responFooter, responPautan] = await Promise.all([
+            fetch('./data/footer.json'),
+            fetch('./data/menu_links.json')
+        ]);
+        const data = await responFooter.json();
+        const pautan = await responPautan.json();
 
         const bekasPeta = document.getElementById('footer-map-container');
         const bekasInfo = document.getElementById('footer-info-container');
@@ -404,10 +553,7 @@ async function muatDataFooter() {
         }
 
         if (bekasInfo) {
-            let pautanHTML = '';
-            data.pautan_pantas.forEach(link => {
-                pautanHTML += `<li><a href="${link.url}">${link.label}</a></li>`;
-            });
+            const pautanHTML = binaPautanMenu(pautan, 'footer');
 
             bekasInfo.innerHTML = `
                 <div class="footer-info">
