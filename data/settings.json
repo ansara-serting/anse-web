@@ -1,5 +1,16 @@
 {
   "grid_highlight_kapsyen_klik": "Klik untuk besarkan paparan >",
   "highlight_lighbox_butang_teks": "Lihat artikel penuh di sini >",
-  "grid_highlight_interval_ms": 10000
+  "grid_highlight_interval_ms": 10000,
+  "subfooter_links": [
+    {
+      "text": "Dasar Privasi",
+      "url": "#dasar-privasi"
+    },
+    {
+      "text": "Penafian",
+      "url": "#penafian"
+    }
+  ],
+  "copyright_text": "© 2026 ANSARASERTING. Hak cipta terpelihara."
 }
