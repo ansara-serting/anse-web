@@ -70,6 +70,7 @@ async function muatDataNavigasi() {
             bekasHighlight.setAttribute('aria-hidden', 'false');
             bekasHighlight.setAttribute('aria-label', 'Sorotan ANSE');
             mobileHighlightClose.addEventListener('click', tutupMobileHighlight);
+            syncMobileHighlightLayout();
 
             if (highlightItems.length > 1) {
                 const controls = document.createElement('div');
@@ -156,8 +157,15 @@ highlightLightbox?.querySelector('[data-lightbox-close]')?.addEventListener('cli
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && highlightLightbox?.getAttribute('aria-hidden') === 'false') {
         tutupLightbox();
-    } else if (event.key === 'Escape' && mobileHighlight?.getAttribute('aria-hidden') === 'false') {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    } else if (event.key === 'Escape'
+        && mobileHighlightViewport.matches
+        && window.innerHeight >= window.innerWidth
+        && mobileHighlight?.getAttribute('aria-hidden') === 'false') {
         tutupMobileHighlight();
+        event.preventDefault();
+        event.stopImmediatePropagation();
     }
 });
 
@@ -184,15 +192,16 @@ mobileHighlightOpen?.addEventListener('click', bukaMobileHighlight);
 const mobileHighlightViewport = window.matchMedia('(max-width: 768px)');
 const syncMobileHighlightLayout = () => {
     const isPortraitMobile = mobileHighlightViewport.matches && window.innerHeight >= window.innerWidth;
-    if (!mobileHighlight || isPortraitMobile) return;
+    if (!mobileHighlight) return;
 
-    mobileHighlight.classList.remove('hidden');
-    mobileHighlight.setAttribute('aria-hidden', 'false');
-    mobileHighlightOpen?.setAttribute('aria-expanded', 'false');
+    mobileHighlight.classList.toggle('hidden', isPortraitMobile);
+    mobileHighlight.setAttribute('aria-hidden', String(isPortraitMobile));
+    mobileHighlightOpen?.setAttribute('aria-expanded', String(!isPortraitMobile));
 };
 
 mobileHighlightViewport.addEventListener('change', syncMobileHighlightLayout);
 window.addEventListener('resize', syncMobileHighlightLayout);
+syncMobileHighlightLayout();
 
 function binaPautanMenu(pautan, namaMenu) {
     return pautan
@@ -592,12 +601,14 @@ async function muatDataTrivia() {
 // =========================================================
 async function muatDataFooter() {
     try {
-        const [responFooter, responPautan] = await Promise.all([
+        const [responFooter, responPautan, responTetapan] = await Promise.all([
             fetch('./data/footer.json'),
-            fetch('./data/menu_links.json')
+            fetch('./data/menu_links.json'),
+            fetch('./data/settings.json')
         ]);
         const data = await responFooter.json();
         const pautan = await responPautan.json();
+        const tetapan = await responTetapan.json();
 
         const bekasPeta = document.getElementById('footer-map-container');
         const bekasInfo = document.getElementById('footer-info-container');
@@ -637,6 +648,19 @@ async function muatDataFooter() {
                     <a class="footer-map-link" href="${data.peta_url}" target="_blank" rel="noopener">Buka lokasi <span aria-hidden="true">↗</span></a>
                 </div>
             `;
+        }
+
+        const pautanSubfooter = document.getElementById('footer-legal-links');
+        const teksHakCipta = document.getElementById('footer-copyright');
+
+        if (pautanSubfooter && Array.isArray(tetapan.subfooter_links)) {
+            pautanSubfooter.innerHTML = tetapan.subfooter_links
+                .map(item => `<a href="${item.url}">${item.text}</a>`)
+                .join('');
+        }
+
+        if (teksHakCipta && tetapan.copyright_text) {
+            teksHakCipta.textContent = tetapan.copyright_text;
         }
     } catch (error) {
         console.error("Gagal memuatkan data Footer:", error);
