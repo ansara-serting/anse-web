@@ -1,0 +1,32 @@
+{
+  "title": "Hubungi ANSE",
+  "intro": "Ada pertanyaan, cadangan, atau ingin berhubung dengan komuniti alumni ANSARA Serting? Kami sedia membantu.",
+  "details": [
+    {
+      "label": "Alamat berdaftar",
+      "value": "MRSM Serting, Bandar Baru Jempol, 72120 Jempol, Negeri Sembilan.",
+      "action": "Buka lokasi di peta",
+      "url": "https://www.google.com/maps/search/?api=1&query=MRSM+Serting"
+    },
+    {
+      "label": "Laman web",
+      "value": "ANSARASERTING.ORG",
+      "action": "Lawati laman web",
+      "url": "https://ansaraserting.org"
+    }
+  ],
+  "social": [
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/ansaraserting"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/ansaraserting/?hl=en"
+    },
+    {
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@ansaraserting"
+    }
+  ]
+}

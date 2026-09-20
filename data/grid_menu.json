@@ -2,7 +2,7 @@
   {
     "tajuk": "Ansara Serting",
     "sub_teks": "Ketahui alumni MRSM Serting dengan lebih lanjut >",
-    "pautan": "#ansara-serting",
+    "pautan": "about.html",
     "objek": "<img src='assets/logo-anse.png' alt='Logo ANSE'>",
     "class_kad": "card-1"
   },
@@ -23,7 +23,7 @@
   {
     "tajuk": "Hubungi kami",
     "sub_teks": "Ada pertanyaan? Kami cuba bantu >",
-    "pautan": "#hubungi",
+    "pautan": "hubungi.html",
     "objek": "<img src='assets/telefon.png' alt='Telefon'>",
     "class_kad": "card-4"
   }
