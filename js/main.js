@@ -549,6 +549,19 @@ function kemaskiniPaparanCarousel() {
 // Memastikan margin dikira semula jika pengguna sengetkan phone/resize browser
 window.addEventListener('resize', kemaskiniPaparanCarousel);
 
+const carouselSection = document.getElementById('seksyen-carousel');
+const socialOverlay = document.querySelector('.social-block-overlay');
+
+if (carouselSection && socialOverlay) {
+    const socialObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            socialOverlay.classList.toggle('is-visible', entry.isIntersecting);
+        });
+    }, { threshold: 0.5 });
+
+    socialObserver.observe(carouselSection);
+}
+
 function slaidSeterusnya() {
     // Jika di slaid terakhir, kembali ke 0. Jika tidak, tambah 1.
     slaidSemasa = (slaidSemasa === jumlahSlaid - 1) ? 0 : slaidSemasa + 1;

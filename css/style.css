@@ -1158,15 +1158,42 @@ body.dark-theme #btn-tutup-drawer {
     fill: currentColor;
 }
 
+@media (orientation: landscape) and (min-width: 769px) {
+    .social-block-overlay {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) scale(0.84);
+        transition: opacity 0.7s ease 0.45s, transform 0.7s cubic-bezier(0.18, 0.9, 0.2, 1.12) 0.45s, visibility 0s linear 1.15s;
+    }
+
+    .social-block-overlay.is-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) scale(1);
+        transition-delay: 0.45s, 0.45s, 0s;
+    }
+}
+
 /* Responsif untuk Mobile (Ikut Mockup 3) */
 @media (max-width: 768px) {
     .social-block-overlay {
         left: auto;
         right: -30px; /* Anjak keluar ke kanan supaya terpotong separuh */
-        transform: none;
+        top: 120px; /* Sedikit ditolak ke bawah supaya tidak bertindih dengan A11y */
+        transform: translateX(26px);
         width: 100px;
         height: 280px; /* Lebih panjang untuk tampung ikon menegak */
         padding-top: 90px; /* Tolak ke bawah sikit dari butang A11y */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.55s ease 0.45s, transform 0.55s cubic-bezier(0.18, 0.9, 0.2, 1.1) 0.45s, visibility 0s linear 1.0s;
+    }
+
+    .social-block-overlay.is-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+        transition-delay: 0.45s, 0.45s, 0s;
     }
     
     .social-title, .social-subtitle {
