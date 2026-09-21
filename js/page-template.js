@@ -7,15 +7,22 @@ async function muatTemplatHalaman() {
     if (!namaHalaman || !bekasKandungan) return;
 
     try {
-        const [header, footer, response] = await Promise.all([
+        const [header, footer, response, footerDataResponse, menuLinksResponse, settingsResponse] = await Promise.all([
             fetch('templates/header.html').then(periksaResponse),
             fetch('templates/footer.html').then(periksaResponse),
-            fetch(`data/${namaHalaman}.json`).then(periksaResponse)
+            fetch(`data/${namaHalaman}.json`).then(periksaResponse),
+            fetch('data/footer.json').then(periksaResponse),
+            fetch('data/menu_links.json').then(periksaResponse),
+            fetch('data/settings.json').then(periksaResponse)
         ]);
         const data = await response.json();
+        const footerData = await footerDataResponse.json();
+        const menuLinks = await menuLinksResponse.json();
+        const settings = await settingsResponse.json();
 
         document.querySelector('#site-header').innerHTML = await header.text();
         document.querySelector('#site-footer').innerHTML = await footer.text();
+        binaFooter(footerData, menuLinks, settings);
 
         const pembinaHalaman = {
             about: binaKandunganAbout,
@@ -28,6 +35,58 @@ async function muatTemplatHalaman() {
     } catch (error) {
         console.error('Gagal memuatkan templat halaman:', error);
         bekasKandungan.innerHTML = '<p class="page-error">Kandungan halaman tidak dapat dimuatkan.</p>';
+    }
+}
+
+function binaFooter(data, pautan, tetapan) {
+    const bekasPeta = document.querySelector('#footer-map-container');
+    const bekasInfo = document.querySelector('#footer-info-container');
+
+    if (bekasPeta) {
+        bekasPeta.innerHTML = `<iframe src="${data.peta_embed}" loading="lazy" allowfullscreen></iframe>`;
+    }
+
+    if (bekasInfo) {
+        const pautanHTML = pautan
+            .filter(item => Array.isArray(item.active_in_menu) && item.active_in_menu.includes('footer'))
+            .map(item => `<li><a href="${item.url}">${item.label}</a></li>`)
+            .join('');
+
+        bekasInfo.innerHTML = `
+            <div class="footer-info">
+                <div class="footer-brand">
+                    <div class="footer-logo-container">
+                        <img src="assets/logo-anse.png" alt="Logo ANSE">
+                    </div>
+                    <span class="footer-eyebrow">Komuniti ANSE Serting</span>
+                </div>
+                <h2>${data.nama_organisasi}</h2>
+                <p class="footer-registration">No. pendaftaran: ${data.no_pendaftaran}</p>
+                <address>${data.alamat.replace(/\n/g, '<br>')}</address>
+            </div>
+            <div class="footer-links">
+                <p class="footer-eyebrow">Terokai</p>
+                <h2>${data.laman_web}</h2>
+                <ul>${pautanHTML}</ul>
+            </div>
+            <div class="footer-location">
+                <p class="footer-eyebrow">Kunjungi kami</p>
+                <h2>MRSM Serting</h2>
+                <p>Bandar Baru Jempol, Negeri Sembilan</p>
+                <a class="footer-map-link" href="${data.peta_url}" target="_blank" rel="noopener">Buka lokasi <span aria-hidden="true">↗</span></a>
+            </div>
+        `;
+    }
+
+    const pautanSubfooter = document.querySelector('#footer-legal-links');
+    const teksHakCipta = document.querySelector('#footer-copyright');
+    if (pautanSubfooter && Array.isArray(tetapan.subfooter_links)) {
+        pautanSubfooter.innerHTML = tetapan.subfooter_links
+            .map(item => `<a href="${item.url}">${item.text}</a>`)
+            .join('');
+    }
+    if (teksHakCipta && tetapan.copyright_text) {
+        teksHakCipta.textContent = tetapan.copyright_text;
     }
 }
 

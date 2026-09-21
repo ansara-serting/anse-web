@@ -1,5 +1,7 @@
 // --- JALANKAN SEMUA FUNGSI SEMASA LAMAN DIMUATKAN ---
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+    await muatTemplatFooter();
+    initPemantauFooter();
     muatDataNavigasi();
     muatDataCarousel();
     muatDataTrivia();
@@ -8,6 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
     initTema();        
     initSaizTeks();    
 });
+
+async function muatTemplatFooter() {
+    const bekasFooter = document.querySelector('#site-footer');
+    if (!bekasFooter) return;
+
+    try {
+        const response = await fetch('./templates/footer.html');
+        if (!response.ok) throw new Error(`Permintaan footer gagal: ${response.status}`);
+        bekasFooter.innerHTML = await response.text();
+    } catch (error) {
+        console.error('Gagal memuatkan templat footer:', error);
+    }
+}
 
 // =========================================================
 // 1. SUNTIKAN DATA JSON (SEKSYEN NAVIGASI)
@@ -728,7 +743,6 @@ if (btnScrollIndicator) {
 }
 
 // --- KOD BARU: PEMANTAU FOOTER (Intersection Observer) ---
-const footerSeksyen = document.getElementById('seksyen-footer');
 let footerIsVisible = false;
 const footerViewport = window.matchMedia('(max-width: 768px)');
 
@@ -736,7 +750,10 @@ function syncMobileFooterControls() {
     mobileHighlightOpen?.classList.toggle('footer-is-visible', footerViewport.matches && footerIsVisible);
 }
 
-if (footerSeksyen && btnScrollIndicator) {
+function initPemantauFooter() {
+    const footerSeksyen = document.getElementById('seksyen-footer');
+    if (!footerSeksyen || !btnScrollIndicator) return;
+
     const footerObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             footerIsVisible = entry.isIntersecting;
