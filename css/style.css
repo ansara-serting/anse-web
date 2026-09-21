@@ -664,6 +664,28 @@
     opacity: 0.9;
 }
 
+.card-subtext-pill {
+    display: inline-block;
+    max-width: 100%;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.72);
+    line-height: 1.3;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-card:hover .card-subtext-pill,
+.menu-card:focus-visible .card-subtext-pill {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.16);
+}
+
+.menu-card:active .card-subtext-pill {
+    transform: translateY(-1px) scale(1.02);
+}
+
 /* Gambar Rich Photo (Menggantikan SVG lama) */
 .card-objek {
     position: absolute;
@@ -862,23 +884,31 @@ body.dark-theme .btn-hamburger {
         bottom: 20px;
         display: block;
         z-index: 899;
-        padding: 4px 10px;
-        border: 0;
-        border-radius: 4px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 999px;
         background: #e74c3c;
         color: #ffffff;
-        font-size: 0.75rem;
+        font-size: 0.78rem;
         font-weight: bold;
         letter-spacing: 1px;
         cursor: pointer;
         box-shadow: 0 8px 18px rgba(0, 0, 0, 0.38), 0 2px 4px rgba(0, 0, 0, 0.22);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
     }
 
     .mobile-highlight-open:hover,
     .mobile-highlight-open:focus-visible {
-        transform: translateY(-2px);
+        transform: translateY(-3px) scale(1.04);
+        background: #f05a48;
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.42), 0 3px 6px rgba(0, 0, 0, 0.24);
+    }
+
+    .mobile-highlight-open:active {
+        transform: translateY(-1px) scale(0.98);
     }
 
     .mobile-highlight-open:focus-visible {

@@ -35,7 +35,7 @@ async function muatDataNavigasi() {
                     <a href="${item.pautan}" class="menu-card ${item.class_kad}">
                         <div class="card-content">
                             <h3>${item.tajuk}</h3>
-                            <p>${item.sub_teks}</p>
+                            <p class="card-subtext-pill">${item.sub_teks}</p>
                         </div>
                         ${objekHTML}
                     </a>
