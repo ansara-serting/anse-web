@@ -15,11 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
 async function muatDataNavigasi() {
     try {
         const [responMenu, responBerita, responTetapan] = await Promise.all([
-            fetch('./data/grid_menu.json'),
+            fetch('./data/menu_links.json'),
             fetch('./data/content.json'),
             fetch('./data/settings.json')
         ]);
-        const dataMenu = await responMenu.json();
+        const dataMenu = (await responMenu.json())
+            .filter(item => Array.isArray(item.active_in_menu) && item.active_in_menu.includes('grid_menu'));
         const dataBerita = await responBerita.json();
         const tetapan = await responTetapan.json();
         const kapsyenHighlight = tetapan.grid_highlight_kapsyen_klik;
@@ -32,7 +33,7 @@ async function muatDataNavigasi() {
             dataMenu.forEach(item => {
                 const objekHTML = item.objek ? `<div class="card-objek">${item.objek}</div>` : '';
                 bekasMenu.innerHTML += `
-                    <a href="${item.pautan}" class="menu-card ${item.class_kad}">
+                    <a href="${item.url}" class="menu-card ${item.class_kad}">
                         <div class="card-content">
                             <h3>${item.tajuk}</h3>
                             <p class="card-subtext-pill">${item.sub_teks}</p>
