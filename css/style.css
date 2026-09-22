@@ -1,11 +1,11 @@
 /* Templat halaman maklumat */
-.about-page {
+.content-page {
     background-color: var(--kuning-anse, #ffd700);
     color: #111;
     font-family: Arial, sans-serif;
 }
 
-.about-page .header-nav {
+.content-page .header-nav {
     padding: 20px 5%;
     display: flex;
     justify-content: space-between;
@@ -14,7 +14,7 @@
     color: #fff;
 }
 
-.about-page .btn-kembali {
+.content-page .btn-kembali {
     color: var(--kuning-anse, #ffd700);
     text-decoration: none;
     font-weight: bold;
@@ -22,20 +22,20 @@
     transition: opacity 0.2s;
 }
 
-.about-page .btn-kembali:hover { opacity: 0.8; }
+.content-page .btn-kembali:hover { opacity: 0.8; }
 
-.about-page .header-brand {
+.content-page .header-brand {
     font-weight: 900;
     letter-spacing: 2px;
 }
 
-.about-page .content-container {
+.content-page .content-container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 60px 20px;
 }
 
-.about-page .section-title {
+.content-page .section-title {
     font-size: 2.8rem;
     font-weight: 900;
     margin: 0 0 15px;
@@ -43,14 +43,14 @@
     color: #000;
 }
 
-.about-page .lead-text {
+.content-page .lead-text {
     font-size: 1.15rem;
     line-height: 1.7;
     margin: 0 0 50px;
     color: #222;
 }
 
-.about-page .content-section {
+.content-page .content-section {
     background: #fff;
     padding: 40px;
     border-radius: 15px;
@@ -58,8 +58,8 @@
     margin-bottom: 40px;
 }
 
-.about-page .content-section h2,
-.about-page .vm-box h2 {
+.content-page .content-section h2,
+.content-page .vm-box h2 {
     margin-top: 0;
     font-size: 1.8rem;
     border-bottom: 3px solid var(--kuning-anse, #ffd700);
@@ -68,8 +68,8 @@
     display: inline-block;
 }
 
-.about-page .content-section p,
-.about-page .vm-box p {
+.content-page .content-section p,
+.content-page .vm-box p {
     line-height: 1.8;
     font-size: 1rem;
     color: #333;
@@ -153,21 +153,21 @@
 .about-page .exco-role { font-size: 0.9rem; color: #555; margin-bottom: 5px; }
 .about-page .exco-batch { font-size: 0.8rem; color: #888; background: #eee; padding: 3px 8px; border-radius: 12px; display: inline-block; }
 
-.about-page .page-loading,
-.about-page .page-error {
+.content-page .page-loading,
+.content-page .page-error {
     max-width: 1000px;
     margin: 0 auto;
     padding: 60px 20px;
 }
 
-.about-page .page-footer {
+.content-page .page-footer {
     padding: 25px 5%;
     background: #000;
     color: #fff;
     text-align: center;
 }
 
-.about-page .page-footer p { margin: 0; }
+.content-page .page-footer p { margin: 0; }
 
 @media (max-width: 768px) {
     .about-page .vm-grid { grid-template-columns: 1fr; }
@@ -175,59 +175,8 @@
     .about-page .ros-table td { display: block; width: 100%; box-sizing: border-box; }
     .about-page .ros-table th { border-bottom: none; padding-bottom: 5px; }
     .about-page .ros-table td { padding-top: 5px; margin-bottom: 10px; }
-    .about-page .section-title { font-size: 2.2rem; }
-    .about-page .content-section { padding: 25px; }
-}
-
-.contact-page {
-    background-color: var(--kuning-anse, #ffd700);
-    color: #111;
-    font-family: Arial, sans-serif;
-}
-
-.contact-page .header-nav {
-    padding: 20px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000;
-    color: #fff;
-}
-
-.contact-page .btn-kembali {
-    color: var(--kuning-anse, #ffd700);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.95rem;
-}
-
-.contact-page .btn-kembali:hover { opacity: 0.8; }
-
-.contact-page .header-brand {
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-.contact-page .content-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 60px 20px;
-}
-
-.contact-page .section-title {
-    margin: 0 0 15px;
-    color: #000;
-    font-size: 2.8rem;
-    font-weight: 900;
-    line-height: 1.1;
-}
-
-.contact-page .lead-text {
-    max-width: 720px;
-    margin: 0 0 50px;
-    color: #222;
-    font-size: 1.15rem;
-    line-height: 1.7;
+    .content-page .section-title { font-size: 2.2rem; }
+    .content-page .content-section { padding: 25px; }
 }
 
 .contact-page .contact-grid {
@@ -297,7 +246,6 @@
 
 @media (max-width: 768px) {
     .contact-page .contact-grid { grid-template-columns: 1fr; }
-    .contact-page .section-title { font-size: 2.2rem; }
     .contact-page .contact-card { padding: 25px; }
     .contact-page .contact-social-links { flex-direction: column; gap: 15px; }
 }

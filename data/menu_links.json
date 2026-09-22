@@ -2,7 +2,7 @@
   {
     "id": "ansara",
     "label": "ANSE",
-    "url": "about.html",
+    "url": "page.html?page=about",
     "active_in_menu": ["drawer", "footer", "grid_menu"],
     "tajuk": "Ansara Serting",
     "sub_teks": "Ketahui alumni MRSM Serting dengan lebih lanjut >",
@@ -32,7 +32,7 @@
   {
     "id": "hubungi",
     "label": "Hubungi Kami",
-    "url": "hubungi.html",
+    "url": "page.html?page=hubungi",
     "active_in_menu": ["drawer", "footer", "grid_menu"],
     "tajuk": "Hubungi kami",
     "sub_teks": "Ada pertanyaan? Kami cuba bantu >",

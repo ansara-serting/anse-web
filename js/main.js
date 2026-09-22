@@ -30,7 +30,7 @@ async function muatTemplatFooter() {
 async function muatDataNavigasi() {
     try {
         const [responMenu, responBerita, responTetapan] = await Promise.all([
-            fetch('./data/menu_links.json'),
+            fetch('./data/menu_links.json', { cache: 'no-store' }),
             fetch('./data/content.json'),
             fetch('./data/settings.json')
         ]);
@@ -228,7 +228,7 @@ function binaPautanMenu(pautan, namaMenu) {
 
 async function muatDataDrawer() {
     try {
-        const respon = await fetch('./data/menu_links.json');
+        const respon = await fetch('./data/menu_links.json', { cache: 'no-store' });
         const pautan = await respon.json();
         const menuDrawer = document.querySelector('.drawer-menu');
 
@@ -632,7 +632,7 @@ async function muatDataFooter() {
     try {
         const [responFooter, responPautan, responTetapan] = await Promise.all([
             fetch('./data/footer.json'),
-            fetch('./data/menu_links.json'),
+            fetch('./data/menu_links.json', { cache: 'no-store' }),
             fetch('./data/settings.json')
         ]);
         const data = await responFooter.json();

@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', muatTemplatHalaman);
 
 async function muatTemplatHalaman() {
-    const namaHalaman = document.body.dataset.page;
+    const parameterQuery = new URLSearchParams(window.location.search);
+    const encodedQuery = decodeURIComponent(window.location.search.slice(1));
+    const parameterHalaman = parameterQuery.get('page')
+        || new URLSearchParams(encodedQuery).get('page');
+    const namaHalaman = parameterHalaman || document.body.dataset.page;
     const bekasKandungan = document.querySelector('#page-content');
 
     if (!namaHalaman || !bekasKandungan) return;
@@ -12,13 +16,20 @@ async function muatTemplatHalaman() {
             fetch('templates/footer.html').then(periksaResponse),
             fetch(`data/${namaHalaman}.json`).then(periksaResponse),
             fetch('data/footer.json').then(periksaResponse),
-            fetch('data/menu_links.json').then(periksaResponse),
+            fetch('data/menu_links.json', { cache: 'no-store' }).then(periksaResponse),
             fetch('data/settings.json').then(periksaResponse)
         ]);
         const data = await response.json();
         const footerData = await footerDataResponse.json();
         const menuLinks = await menuLinksResponse.json();
         const settings = await settingsResponse.json();
+
+        document.body.dataset.page = namaHalaman;
+        const kelasHalaman = namaHalaman === 'hubungi' ? 'contact-page' : `${namaHalaman}-page`;
+        document.body.classList.add('content-page', kelasHalaman);
+        document.title = namaHalaman === 'about'
+            ? 'Mengenai ANSE | ANSARA Serting'
+            : 'Hubungi ANSE | ANSARA Serting';
 
         document.querySelector('#site-header').innerHTML = await header.text();
         document.querySelector('#site-footer').innerHTML = await footer.text();
